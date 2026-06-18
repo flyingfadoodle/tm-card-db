@@ -18,47 +18,46 @@
 
   <style>
     #site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #1a1200;
-      border-bottom: 2px solid #8b6914;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      padding: 0 20px;
-      gap: 4px;
-    }
-    #site-nav .nav-logo {
-      font-family: Prototype, serif;
-      font-size: 13px;
-      color: #c8a848;
-      letter-spacing: .12em;
-      margin-right: 20px;
-      white-space: nowrap;
+      gap: 2px;
+      margin-left: 20px;
+      vertical-align: middle;
     }
     #site-nav .nav-btn {
       font-family: Prototype, serif;
-      font-size: 12px;
-      letter-spacing: .08em;
-      color: #a88848;
-      background: none;
-      border: none;
-      border-bottom: 3px solid transparent;
-      padding: 12px 18px 9px;
+      font-size: 11px;
+      letter-spacing: .06em;
+      color: #888;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 5px 12px;
       cursor: pointer;
       text-transform: uppercase;
-      transition: color .15s, border-color .15s;
+      transition: color .15s, background .15s;
     }
-    #site-nav .nav-btn:hover { color: #e8c848; }
-    #site-nav .nav-btn.active { color: #e8c848; border-bottom-color: #c8a848; }
+    #site-nav .nav-btn:hover { color: #ccc; background: rgba(0,0,0,0.5); }
+    #site-nav .nav-btn.active { color: #e8c848; background: rgba(0,0,0,0.5); border-color: #8b6914; }
 
     .site-section { display: none; }
     .site-section.active { display: block; }
 
     #section-awards, #section-maps {
-      min-height: 100vh;
-      padding: 30px 20px;
-      background: inherit;
+      min-height: 850px;
+    }
+    #section-awards .app-container,
+    #section-maps .app-container {
+      max-width: 1750px;
+      height: 850px;
+      padding-top: 20px;
+      margin: auto;
+      background-repeat: no-repeat;
+      background: linear-gradient(to top, #000, transparent 20%),
+        linear-gradient(to left top, #000, transparent 20%),
+        linear-gradient(to right top, #000, transparent 20%),
+        url("images/mars2.jpg");
+      background-size: 1750px;
     }
     .stub-container {
       display: flex;
@@ -89,13 +88,6 @@
 
 <html>
   <body>
-    <div id="site-nav">
-      <span class="nav-logo">TM DATABASE</span>
-      <button class="nav-btn active" onclick="showSection('cards', this)">Cards</button>
-      <button class="nav-btn" onclick="showSection('awards', this)">Awards &amp; Milestones</button>
-      <button class="nav-btn" onclick="showSection('maps', this)">Maps</button>
-    </div>
-
     <div id="section-cards" class="site-section active">
     <div class="app-container">
       <div class="list-container">
@@ -103,6 +95,11 @@
           <div id="buttonsContainer-header">
             <div id="titleContainer">
               <div class="title-style">TERRAFORMING MARS CARDS LIST</div>
+            </div>
+            <div id="site-nav">
+              <button class="nav-btn active" onclick="showSection('cards', this)">Cards</button>
+              <button class="nav-btn" onclick="showSection('awards', this)">Awards &amp; Milestones</button>
+              <button class="nav-btn" onclick="showSection('maps', this)">Maps</button>
             </div>
             <a
               disabled
