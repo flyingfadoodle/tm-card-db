@@ -11366,10 +11366,7 @@
           </li>
 
           <!--P68-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-science tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-science tag-space prelude2">
             <div class="title background-color-active">Ceres Tech Market</div>
             <div class="price">12</div>
             <div class="tag tag1 tag-science"></div>
@@ -11378,207 +11375,168 @@
             <div class="points points-big">1</div>
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="resource money">2</div>
-              <div class="slash">/</div>
-              <div class="tile colony"></div>
-              <br/>
-              -X<div class="resource card"></div>
+              <span class="money resource">2</span>/<div class="tile colony"></div>
+              <br />
+              -X<span class="card resource"></span>
               <div class="red-arrow"></div>
-              2X<div class="resource money">1</div>
-              <br/>
-              <div class="description">(Gain 2 M€ per colony. Action: Discard X cards to gain 2X M€.)</div>
+              2X<span class="money resource">1</span>
+              <div class="description">(Gain 2 M€ per colony. Action: Discard X cards to gain 2X M€. 1 VP.)</div>
             </div>
           </li>
 
           <!--P69-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-jovian tag-venus tag-earth prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-jovian tag-venus tag-earth prelude2">
             <div class="title background-color-active">Cloud Tourism</div>
             <div class="price">11</div>
             <div class="tag tag1 tag-jovian"></div>
             <div class="tag tag2 tag-venus"></div>
             <div class="tag tag3 tag-earth"></div>
             <div class="number">#P69</div>
-            
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="resource floater"></div>
-              <br/>
-              <div class="production-box production-box-size1a">
-                <div class="production money">1</div>
-              </div>/<div class="resource-tag tag-earth"></div><div class="resource-tag tag-venus"></div>
-              <br/>
-              <div class="points">1/3<div class="resource floater"></div></div>
-              <div class="description">(Action: Add 1 floater here. +1 MC prod per pair of Earth+Venus tags. 1 VP per 3 floaters.)</div>
+              <span class="floater resource"></span>
+              <br />
+              <div class="production-box production-box-size2">
+                <div class="money production">1</div>
+              </div>/<span class="tag-earth resource-tag"></span><span class="tag-venus resource-tag"></span>
+              <br />
+              <div class="points">1/3<span class="floater resource"></span></div>
+              <div class="description">(Action: Add 1 floater here. +1 MC prod per pair of Earth+Venus tags. 1 VP/3 floaters.)</div>
             </div>
           </li>
 
           <!--P70-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events noneTag prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events noneTag prelude2">
             <div class="title background-color-events">Colonial Envoys</div>
             <div class="price">4</div>
+            <div class="tag tag1 tag-event"></div>
             <div class="number">#P70</div>
-            <div class="requirements">Unity or 2 delegates</div>
+            <div class="requirements"><div class="party party-unity"></div></div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource delegate"></div>*/<div class="tile colony"></div>
-              <br/>
-              <div class="description">(Requires Unity ruling or 2 delegates there. Place 1 delegate per colony you have in separate parties.)</div>
+              <span class="delegate resource"></span>*/<div class="tile colony"></div>
+              <div class="description">(Req: Unity ruling or 2 delegates. Place 1 delegate per colony, in separate parties.)</div>
             </div>
           </li>
 
           <!--P71-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active noneTag prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active noneTag prelude2">
             <div class="title background-color-active">Colonial Representation</div>
             <div class="price">10</div>
             <div class="number">#P71</div>
-            
             <div class="corporate-icon project-icon"></div>
             <div class="content">
               <div class="description" style="font-size:9px">Effect: +1 INFLUENCE.</div>
-              <div class="resource money">3</div>/<div class="tile colony"></div>
-              <br/>
+              <span class="money resource">3</span>/<div class="tile colony"></div>
               <div class="description">(Effect: +1 influence. Action: Gain 3 M€ per colony you have.)</div>
             </div>
           </li>
 
           <!--P72-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-venus prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-venus prelude2">
             <div class="title background-color-events">Envoys from Venus</div>
             <div class="price">1</div>
-            <div class="tag tag1 tag-venus"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-venus"></div>
             <div class="number">#P72</div>
             <div class="requirements">3 Venus tags</div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource delegate"></div><div class="resource delegate"></div>
-              <br/>
+              <span class="delegate resource"></span><span class="delegate resource"></span>
               <div class="description">(Req: 3 Venus tags. Place 2 delegates in 1 party.)</div>
             </div>
           </li>
 
           <!--P73-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-venus prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-venus prelude2">
             <div class="title background-color-active">Floating Refinery</div>
             <div class="price">7</div>
             <div class="tag tag1 tag-venus"></div>
             <div class="number">#P73</div>
-            
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="resource floater"></div>
-              <br/>
-              <div class="resource floater"></div><div class="resource floater"></div>*:
+              <span class="floater resource"></span>/<span class="tag-venus resource-tag"></span>
+              <br />
+              <span class="floater resource"></span><span class="floater resource"></span>
+              <div class="red-arrow"></div>
               <div class="tile venus-tile"></div>
-              <br/>
-              <div class="points">1/3<div class="resource floater"></div></div>
-              <div class="description">(Add 1 floater per Venus tag you have. Action: Remove 2 floaters to raise Venus 1 step. 1 VP per 3 floaters.)</div>
+              <br />
+              <div class="points">1/3<span class="floater resource"></span></div>
+              <div class="description">(Add 1 floater per Venus tag. Action: Remove 2 floaters to raise Venus 1 step. 1 VP/3 floaters.)</div>
             </div>
           </li>
 
           <!--P74-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv automated tag-city tag-building prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv automated tag-city tag-building prelude2">
             <div class="title background-color-automated">Frontier Town</div>
             <div class="price">11</div>
             <div class="tag tag1 tag-city"></div>
             <div class="tag tag2 tag-building"></div>
             <div class="number">#P74</div>
-            <div class="requirements">Mars First or 2 delegates</div>
+            <div class="requirements"><div class="party party-mars-first"></div></div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
               <div class="production-box production-box-size1a">
                 <div class="production-prefix"><div class="minus"></div></div>
-                <div class="production energy"></div>
+                <div class="energy production"></div>
               </div>
-              &nbsp;
               <div class="tile city-tile"></div>*
-              <br/>
-              <div class="description">(Req: Mars First ruling or 2 delegates. -1 energy prod. Place a city tile.)</div>
+              <div class="description">(Req: Mars First. -1 energy prod. Place a city tile.)</div>
             </div>
           </li>
 
           <!--P75-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-space prelude2">
             <div class="title background-color-events">GHG Shipment</div>
             <div class="price">3</div>
-            <div class="tag tag1 tag-space"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-space"></div>
             <div class="number">#P75</div>
-            <div class="requirements">Kelvinists or 2 delegates</div>
+            <div class="requirements"><div class="party party-kelvinists"></div></div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
               <div class="production-box">
-                <div class="production heat"></div>
+                <div class="heat production"></div>
               </div>
-              <br/>
-              <div class="resource heat"></div>/<div class="resource floater"></div>
-              <br/>
-              <div class="description">(Req: Kelvinists ruling or 2 delegates. +1 heat prod. Gain 1 heat per floater you have.)</div>
+              <br />
+              <span class="heat resource"></span>/<span class="floater resource"></span>
+              <div class="description">(Req: Kelvinists. +1 heat prod. Gain 1 heat per floater you have.)</div>
             </div>
           </li>
 
           <!--P76-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-venus prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-venus prelude2 reqs" data-venus="10">
             <div class="title background-color-events">Ishtar Expedition</div>
             <div class="price">6</div>
-            <div class="tag tag1 tag-venus"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-venus"></div>
             <div class="number">#P76</div>
-            <div class="requirements">Venus 10%</div>
+            <div class="requirements">10% Venus</div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>
-              &nbsp;
-              <div class="resource card"></div><div class="resource card"></div>*
-              <br/>
+              <span class="titanium resource"></span><span class="titanium resource"></span><span class="titanium resource"></span>
+              <span class="card resource"></span><span class="card resource"></span>*
               <div class="description">(Req: Venus 10%. Gain 3 titanium. Draw 2 Venus cards.)</div>
             </div>
           </li>
 
           <!--P77-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-jovian prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-jovian prelude2">
             <div class="title background-color-events">Jovian Envoys</div>
             <div class="price">2</div>
-            <div class="tag tag1 tag-jovian"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-jovian"></div>
             <div class="number">#P77</div>
             <div class="requirements">2 Jovian tags</div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource delegate"></div><div class="resource delegate"></div>
-              <br/>
+              <span class="delegate resource"></span><span class="delegate resource"></span>
               <div class="description">(Req: 2 Jovian tags. Place 2 delegates in 1 party.)</div>
             </div>
           </li>
 
           <!--P78-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-space prelude2">
             <div class="title background-color-active">L1 Trade Terminal</div>
             <div class="price">25</div>
             <div class="tag tag1 tag-space"></div>
@@ -11586,19 +11544,15 @@
             <div class="points points-big">2</div>
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="tile colony"></div>:+2
-              <br/>
-              3 diverse tags*: add 1 resource to 3 different cards with resources.
-              <br/>
-              <div class="description">(Effect: When you trade, increase colony track 2 steps first. Add resources to 3 different cards.)</div>
+              <div class="tile colony"></div> : +2
+              <br />
+              3 <span class="wild resource"></span>* diverse
+              <div class="description">(Effect: When you trade, increase colony track 2 steps first. Add 1 resource to 3 different cards with resources. 2 VP.)</div>
             </div>
           </li>
 
           <!--P79-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv automated tag-microbe tag-plant prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv automated tag-microbe tag-plant prelude2">
             <div class="title background-color-automated">Microgravity Nutrition</div>
             <div class="price">11</div>
             <div class="tag tag1 tag-microbe"></div>
@@ -11607,78 +11561,66 @@
             <div class="points points-big">1</div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="production-box production-box-size1a">
-                <div class="production money">1</div>
+              <div class="production-box production-box-size2">
+                <div class="money production">1</div>
               </div>/<div class="tile colony"></div>
-              <br/>
               <div class="description">(+1 MC prod per colony you have. 1 VP.)</div>
             </div>
           </li>
 
           <!--P80-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events noneTag prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events noneTag prelude2">
             <div class="title background-color-events">Red Appeasement</div>
-            
+            <div class="price">0</div>
+            <div class="tag tag1 tag-event"></div>
             <div class="number">#P80</div>
-            <div class="requirements">Reds or 2 delegates + no opponent passed</div>
+            <div class="requirements"><div class="party party-reds"></div></div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
               <div class="production-box">
-                <div class="production money">2</div>
+                <div class="money production">2</div>
               </div>
-              &nbsp;PASS*
-              <br/>
-              <div class="description">(Req: Reds ruling or 2 delegates AND no other player has passed. +2 MC prod. This counts as passing.)</div>
+              PASS*
+              <div class="description">(Req: Reds + no opponent passed. +2 MC prod. This counts as passing — no more turns this generation.)</div>
             </div>
           </li>
 
           <!--P81-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-microbe tag-plant tag-venus prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-microbe tag-plant tag-venus prelude2 reqs" data-temperature="-4">
             <div class="title background-color-events">Soil Studies</div>
             <div class="price">13</div>
-            <div class="tag tag1 tag-microbe"></div>
-            <div class="tag tag2 tag-plant"></div>
-            <div class="tag tag3 tag-venus"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-microbe"></div>
+            <div class="tag tag3 tag-plant"></div>
             <div class="number">#P81</div>
-            <div class="requirements">-4°C or lower</div>
+            <div class="requirements requirements-max">max -4°C</div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource plant"></div>/<div class="resource-tag tag-venus"></div>
-              <div class="resource-tag tag-plant"></div><div class="tile colony"></div>
-              <br/>
+              <span class="plant resource"></span>/
+              <span class="tag-venus resource-tag"></span>
+              <span class="tag-plant resource-tag"></span>
+              <div class="tile colony"></div>
               <div class="description">(Req: -4°C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.)</div>
             </div>
           </li>
 
           <!--P82-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-plant prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-plant prelude2">
             <div class="title background-color-events">Special Permit</div>
             <div class="price">5</div>
-            <div class="tag tag1 tag-plant"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-plant"></div>
             <div class="number">#P82</div>
-            <div class="requirements">Greens or 2 delegates</div>
+            <div class="requirements"><div class="party party-greens"></div></div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              steal 4<div class="resource plant red-outline"></div>
-              <br/>
-              <div class="description">(Req: Greens ruling or 2 delegates. Steal 4 plants from any player.)</div>
+              steal 4<span class="plant resource red-outline"></span>
+              <div class="description">(Req: Greens. Steal 4 plants from any player.)</div>
             </div>
           </li>
 
           <!--P83-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv automated tag-earth prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv automated tag-earth prelude2">
             <div class="title background-color-automated">Sponsoring Nation</div>
             <div class="price">21</div>
             <div class="tag tag1 tag-earth"></div>
@@ -11687,83 +11629,68 @@
             <div class="promo-icon project-icon"></div>
             <div class="content">
               <div class="tile rating"></div><div class="tile rating"></div><div class="tile rating"></div>
-              <br/>
-              <div class="resource delegate"></div><div class="resource delegate"></div>
-              <br/>
+              <br />
+              <span class="delegate resource"></span><span class="delegate resource"></span>
               <div class="description">(Req: 4 Earth tags. Gain 3 TR. Place 2 delegates.)</div>
             </div>
           </li>
 
           <!--P84-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-venus tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-venus tag-space prelude2">
             <div class="title background-color-events">Stratospheric Expedition</div>
             <div class="price">12</div>
-            <div class="tag tag1 tag-venus"></div>
-            <div class="tag tag2 tag-space"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-venus"></div>
+            <div class="tag tag3 tag-space"></div>
             <div class="number">#P84</div>
             <div class="points points-big">1</div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource floater"></div><div class="resource floater"></div>*
-              &nbsp;
-              <div class="resource card"></div><div class="resource card"></div>*
-              <br/>
+              <span class="floater resource"></span><span class="floater resource"></span>*
+              <span class="card resource"></span><span class="card resource"></span>*
               <div class="description">(Add 2 floaters to ANY card. Draw 2 Venus cards. 1 VP.)</div>
             </div>
           </li>
 
           <!--P85-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv automated tag-building tag-space tag-jovian tag-earth prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv automated tag-building tag-space tag-jovian tag-earth prelude2">
             <div class="title background-color-automated">Summit Logistics</div>
             <div class="price">10</div>
             <div class="tag tag1 tag-building"></div>
             <div class="tag tag2 tag-space"></div>
             <div class="tag tag3 tag-jovian"></div>
             <div class="number">#P85</div>
-            <div class="requirements">Scientists or 2 delegates</div>
+            <div class="requirements"><div class="party party-scientists"></div></div>
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="resource money">1</div>/
-              <div class="resource-tag tag-jovian"></div><div class="resource-tag tag-earth"></div>
-              <div class="resource-tag tag-venus"></div><div class="tile colony"></div>
-              <br/>
-              <div class="resource card"></div><div class="resource card"></div>
-              <br/>
-              <div class="description">(Req: Scientists ruling or 2 delegates. Gain 1 M€ per Jovian/Earth/Venus tag and colony. Draw 2 cards.)</div>
+              <span class="money resource">1</span>/
+              <span class="tag-jovian resource-tag"></span>
+              <span class="tag-earth resource-tag"></span>
+              <span class="tag-venus resource-tag"></span>
+              <div class="tile colony"></div>
+              <br />
+              <span class="card resource"></span><span class="card resource"></span>
+              <div class="description">(Req: Scientists. Gain 1 M€ per Jovian/Earth/Venus tag and colony. Draw 2 cards.)</div>
             </div>
           </li>
 
           <!--P86-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv events tag-venus prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv events tag-venus prelude2">
             <div class="title background-color-events">Unexpected Application</div>
             <div class="price">4</div>
-            <div class="tag tag1 tag-venus"></div>
+            <div class="tag tag1 tag-event"></div>
+            <div class="tag tag2 tag-venus"></div>
             <div class="number">#P86</div>
-            
             <div class="promo-icon project-icon"></div>
             <div class="content">
-              <div class="minus"></div><div class="resource card"></div>
-              &nbsp;
+              -<span class="card resource"></span>
               <div class="tile venus-tile"></div>
-              <br/>
               <div class="description">(Discard 1 card to raise Venus 1 step.)</div>
             </div>
           </li>
 
           <!--P87-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv automated tag-venus tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv automated tag-venus tag-space prelude2">
             <div class="title background-color-automated">Venus Allies</div>
             <div class="price">30</div>
             <div class="tag tag1 tag-venus"></div>
@@ -11773,77 +11700,60 @@
             <div class="promo-icon project-icon"></div>
             <div class="content">
               <div class="tile venus-tile"></div><div class="tile venus-tile"></div>
-              &nbsp;
-              <div class="resource money">4</div>/<div class="tile colony"></div>
-              <br/>
+              <span class="money resource">4</span>/<div class="tile colony"></div>
               <div class="description">(Raise Venus 2 steps. Gain 4 M€ per colony. 2 VP.)</div>
             </div>
           </li>
 
           <!--P88-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-venus tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-venus tag-space prelude2">
             <div class="title background-color-active">Venus Orbital Survey</div>
             <div class="price">18</div>
             <div class="tag tag1 tag-venus"></div>
             <div class="tag tag2 tag-space"></div>
             <div class="number">#P88</div>
-            
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="description" style="font-size:9px">ACTION: Reveal top 2 cards. Take any Venus cards free. Buy or discard the rest.</div>
-              <div class="description">(Reveal top 2 cards — Venus cards go to hand for free, others you buy or discard.)</div>
+              <div class="description" style="font-size:9px">ACTION: REVEAL TOP 2 CARDS. TAKE ANY VENUS CARDS TO HAND FOR FREE. BUY OR DISCARD THE REST.</div>
             </div>
           </li>
 
           <!--P89-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-venus prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-venus prelude2">
             <div class="title background-color-active">Venus Shuttles</div>
             <div class="price">9</div>
             <div class="tag tag1 tag-venus"></div>
             <div class="number">#P89</div>
-            
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="resource money">12</div>(<div class="minus"></div><div class="resource money">1</div>/<div class="resource-tag tag-venus"></div>):
+              <span class="money resource">12</span>(-<span class="money resource">1</span>/<span class="tag-venus resource-tag"></span>)
+              <div class="red-arrow"></div>
               <div class="tile venus-tile"></div>
-              <br/>
-              <div class="resource floater"></div><div class="resource floater"></div>*
-              <br/>
-              <div class="description">(Add 2 floaters to ANY Venus card. Action: Pay 12 M€ (reduced by 1 per Venus tag) to raise Venus 1 step.)</div>
+              <br />
+              <span class="floater resource"></span><span class="floater resource"></span>*
+              <div class="description">(Add 2 floaters to ANY Venus card. Action: Pay 12 M€ (−1 per Venus tag) to raise Venus 1 step.)</div>
             </div>
           </li>
 
           <!--P90-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv active tag-venus tag-space prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv active tag-venus tag-space prelude2">
             <div class="title background-color-active">Venus Trade Hub</div>
             <div class="price">12</div>
             <div class="tag tag1 tag-venus"></div>
             <div class="tag tag2 tag-space"></div>
             <div class="number">#P90</div>
-            <div class="points points-big">1</div><div class="requirements">2 Venus tags</div>
+            <div class="points points-big">1</div>
+            <div class="requirements">2 Venus tags</div>
             <div class="corporate-icon project-icon"></div>
             <div class="content">
-              <div class="tile colony"></div>:
-              <div class="resource money">3</div>
-              <br/>
+              <div class="tile colony"></div> :
+              <span class="money resource">3</span>
               <div class="description">(Req: 2 Venus tags. Effect: When you trade, gain 3 M€. 1 VP.)</div>
             </div>
           </li>
 
           <!--P91-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv automated tag-earth prelude2"
-          >
+          <li onclick="getClickedCard();" class="filterDiv automated tag-earth prelude2">
             <div class="title background-color-automated">WG Project</div>
             <div class="price">9</div>
             <div class="tag tag1 tag-earth"></div>
@@ -15942,35 +15852,27 @@
 
 
           <!--P43-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-science tag-wild prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-science tag-wild prelude2">
             <div class="title background-color-prelude">Applied Science</div>
             <div class="tag tag1 tag-science"></div>
             <div class="tag tag2 tag-wild"></div>
             <div class="prelude-label">PRELUDE</div>
-            <div class="number" style="margin-left: 99px">#P43</div>
+            <div class="number" style="margin-left: 50px">#P43</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource science"></div>*
+              <span class="science resource"></span>
               <div class="red-arrow"></div>
-              <div class="resource wild"></div>*
-              <br/>
-              <div class="resource science"></div><div class="resource science"></div><div class="resource science"></div>
-              <div class="resource science"></div><div class="resource science"></div><div class="resource science"></div>
-              <br/>
-              <div class="description">(Add 6 science resources here. Action: Remove 1 to add 1 resource to any card with a resource OR gain 1 standard resource.)</div>
+              <span class="wild resource"></span>*
+              <br />
+              <span class="science resource"></span><span class="science resource"></span><span class="science resource"></span>
+              <span class="science resource"></span><span class="science resource"></span><span class="science resource"></span>
+              <div class="description">(Add 6 science resources here. Action: Remove 1 to add 1 resource to any card with resources or gain 1 standard resource.)</div>
             </div>
           </li>
           <!--P44-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-venus tag-floater prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-venus tag-floater prelude2">
             <div class="title background-color-prelude">Atmospheric Enhancers</div>
             <div class="tag tag1 tag-venus"></div>
-            <div class="tag tag2 tag-floater"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P44</div>
             <div class="prelude-icon preludeCard-icon"></div>
@@ -15980,34 +15882,28 @@
               <div class="tile oxygen-tile"></div><div class="tile oxygen-tile"></div>
               OR
               <div class="tile venus-tile"></div><div class="tile venus-tile"></div>
-              <br/>
-              <div class="resource card"></div><div class="resource card"></div>*
-              <br/>
-              <div class="description">(Raise temperature 2 steps, OR oxygen 2 steps, OR Venus 2 steps. Draw 2 cards with floater icons.)</div>
+              <br />
+              <span class="card resource"></span><span class="card resource"></span>*
+              <div class="description">(Raise temperature 2, OR oxygen 2, OR Venus 2. Draw 2 floater cards.)</div>
             </div>
           </li>
           <!--P45-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-earth prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-earth prelude2">
             <div class="title background-color-prelude">Board of Directors</div>
             <div class="tag tag1 tag-earth"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P45</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource director"></div><div class="resource director"></div>
-              <div class="resource director"></div><div class="resource director"></div>
-              <br/>
-              <div class="description" style="font-size:9px">(Add 4 director resources here. Action: Draw 1 prelude card — either discard it, or pay 12 M€ and remove 1 director to play it.)</div>
+              <span class="director resource"></span><span class="director resource"></span>
+              <span class="director resource"></span><span class="director resource"></span>
+              <br />
+              <div class="description" style="font-size:9px">ACTION: DRAW 1 PRELUDE CARD. EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR TO PLAY IT.</div>
+              <div class="description">(Add 4 director resources here.)</div>
             </div>
           </li>
           <!--P46-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space prelude2">
             <div class="title background-color-prelude">Colony Trade Hub</div>
             <div class="tag tag1 tag-space"></div>
             <div class="prelude-label">PRELUDE</div>
@@ -16015,43 +15911,33 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="production-box">
-                <div class="production energy"></div>
+                <div class="energy production"></div>
               </div>
-              &nbsp;
-              <div class="resource titanium"></div><div class="resource titanium"></div>
-              <br/>
-              <div class="tile colony"></div>:
-              <div class="resource money">2</div>
-              <br/>
-              <div class="description">(+1 energy prod. Gain 2 titanium. Effect: When any colony is placed, gain 2 M€.)</div>
+              <span class="titanium resource"></span><span class="titanium resource"></span>
+              <br />
+              <div class="tile colony"></div> :
+              <span class="money resource">2</span>
+              <div class="description">(+1 energy prod. Gain 2 titanium. Effect: When any colony placed, gain 2 M€.)</div>
             </div>
           </li>
           <!--P47-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-earth prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-earth prelude2">
             <div class="title background-color-prelude">Corridors of Power</div>
             <div class="tag tag1 tag-earth"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P47</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="corporate-icon party-leader-icon"></div>:
-              <div class="resource card"></div>
-              <br/>
+              <div class="party party-top"></div> :
+              <span class="card resource"></span>
+              <br />
               <div class="tile rating"></div>
-              &nbsp;
-              <div class="resource money">4</div>
-              <br/>
-              <div class="description">(Effect: Each time you become party leader, draw 1 card. Raise TR 1 step. Gain 4 M€.)</div>
+              <span class="money resource">4</span>
+              <div class="description">(Effect: Each time you become party leader, draw 1 card. Raise TR 1. Gain 4 M€.)</div>
             </div>
           </li>
           <!--P48-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space prelude2">
             <div class="title background-color-prelude">Early Colonization</div>
             <div class="tag tag1 tag-space"></div>
             <div class="prelude-label">PRELUDE</div>
@@ -16059,59 +15945,45 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="tile colony"></div>
-              &nbsp;
-              <div class="resource energy"></div><div class="resource energy"></div><div class="resource energy"></div>
-              <br/>
+              <span class="energy resource"></span><span class="energy resource"></span><span class="energy resource"></span>
+              <br />
               <div class="description" style="font-size:9px">INCREASE ALL COLONY TRACKS 2 STEPS.</div>
               <div class="description">(Place a colony. Gain 3 energy.)</div>
             </div>
           </li>
           <!--P49-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space prelude2">
             <div class="title background-color-prelude">Floating Trade Hub</div>
             <div class="tag tag1 tag-space"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P49</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource floater"></div><div class="resource floater"></div>*
-              <br/>
-              X<div class="resource floater"></div>
+              <span class="floater resource"></span><span class="floater resource"></span>*
+              <br />
+              X<span class="floater resource"></span>
               <div class="red-arrow"></div>
-              X<div class="resource wild"></div>
-              <br/>
-              <div class="description">(Action: Add 2 floaters to ANY card, OR remove X floaters to gain X of one standard resource.)</div>
+              X<span class="wild resource"></span>
+              <div class="description">(Action: Add 2 floaters to ANY card. OR remove X floaters to gain X of one standard resource.)</div>
             </div>
           </li>
           <!--P50-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card noneTag prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card noneTag prelude2">
             <div class="title background-color-prelude">Focused Organization</div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P50</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource card"></div>
-              &nbsp;
-              <div class="resource wild"></div>
-              <br/>
-              <div class="resource card"></div><div class="resource wild"></div>
+              <span class="card resource"></span><span class="wild resource"></span>
+              <br />
+              <span class="card resource"></span><span class="wild resource"></span>
               <div class="red-arrow"></div>
-              <div class="resource card"></div><div class="resource wild"></div>
-              <br/>
+              <span class="card resource"></span><span class="wild resource"></span>
               <div class="description">(Draw 1 card and gain 1 standard resource. Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.)</div>
             </div>
           </li>
           <!--P51-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-earth prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-earth prelude2">
             <div class="title background-color-prelude">High Circles</div>
             <div class="tag tag1 tag-earth"></div>
             <div class="prelude-label">PRELUDE</div>
@@ -16119,79 +15991,63 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="tile rating"></div>
-              <div class="resource card"></div>*
-              <div class="resource delegate"></div><div class="resource delegate"></div>
-              <br/>
+              <span class="card resource"></span>*
+              <span class="delegate resource"></span><span class="delegate resource"></span>
+              <br />
               <div class="description" style="font-size:9px">Effect: +1 INFLUENCE.</div>
-              <div class="description">(Raise TR 1 step. Draw 1 card with party requirement. Place 2 delegates in 1 party.)</div>
+              <div class="description">(Raise TR 1. Draw 1 card with party requirement. Place 2 delegates in 1 party.)</div>
             </div>
           </li>
           <!--P52-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-building prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-building prelude2">
             <div class="title background-color-prelude">Industrial Complex</div>
             <div class="tag tag1 tag-building"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P52</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource money">-18</div>
-              &nbsp;
+              <span class="money resource">-18</span>
+              <br />
               <div class="production-box production-box-size1a">
-                <div class="production wild">1</div>
+                <div class="production money">1</div>
               </div>*
-              <br/>
-              <div class="description">(Lose 18 M€. Increase all your productions that are below 1 to 1.)</div>
+              <div class="description">(Lose 18 M€. Increase all your productions that are below 1, to 1.)</div>
             </div>
           </li>
           <!--P53-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space prelude2">
             <div class="title background-color-prelude">Main Belt Asteroids</div>
             <div class="tag tag1 tag-space"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P53</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource asteroid"></div>*
-              <br/>
-              <div class="resource money">-5</div>
-              &nbsp;
-              <div class="resource asteroid"></div><div class="resource asteroid"></div>
-              <div class="resource asteroid"></div><div class="resource asteroid"></div>
-              <div class="resource asteroid"></div><div class="resource asteroid"></div>
-              <br/>
-              <div class="points">1/2<div class="resource asteroid"></div></div>
-              <div class="description">(Lose 5 M€. Add 6 asteroids here. Action: Gain 1 asteroid to ANY card. 1 VP per 2 asteroids.)</div>
+              <span class="asteroid resource"></span>*
+              <br />
+              <span class="money resource">-5</span>
+              <span class="asteroid resource"></span><span class="asteroid resource"></span>
+              <span class="asteroid resource"></span><span class="asteroid resource"></span>
+              <span class="asteroid resource"></span><span class="asteroid resource"></span>
+              <br />
+              <div class="points">1/2<span class="asteroid resource"></span></div>
+              <div class="description">(Lose 5 M€. Add 6 asteroids here. Action: Add 1 asteroid to ANY card. 1 VP/2 asteroids.)</div>
             </div>
           </li>
           <!--P54-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card noneTag prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card noneTag prelude2">
             <div class="title background-color-prelude">Nobel Prize</div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P54</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource money">5</div>
-              &nbsp;
-              <div class="resource card"></div><div class="resource card"></div>*
-              <br/>
               <div class="points points-big">2</div>
+              <span class="money resource">5</span>
+              <span class="card resource"></span><span class="card resource"></span>*
               <div class="description">(Gain 5 M€. Draw 2 cards with requirements. 2 VP.)</div>
             </div>
           </li>
           <!--P55-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space prelude2">
             <div class="title background-color-prelude">Old Mining Colony</div>
             <div class="tag tag1 tag-space"></div>
             <div class="prelude-label">PRELUDE</div>
@@ -16199,20 +16055,15 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="production-box">
-                <div class="production titanium"></div>
+                <div class="titanium production"></div>
               </div>
-              &nbsp;
               <div class="tile colony"></div>
-              -<div class="resource card"></div>
-              <br/>
+              -<span class="card resource"></span>
               <div class="description">(+1 titanium prod. Place 1 colony. Discard 1 card.)</div>
             </div>
           </li>
           <!--P56-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-earth tag-jovian tag-venus prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-earth tag-jovian tag-venus prelude2">
             <div class="title background-color-prelude">Planetary Alliance</div>
             <div class="tag tag1 tag-earth"></div>
             <div class="tag tag2 tag-jovian"></div>
@@ -16222,120 +16073,91 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="tile rating"></div><div class="tile rating"></div>
-              &nbsp;
-              <div class="resource card"></div><div class="resource card-jovian"></div>
-              <div class="resource card-venus"></div>
-              <br/>
-              <div class="description">(Raise TR 2 steps. Draw 1 Jovian card and 1 Venus card.)</div>
+              <span class="card resource"></span>*<span class="card resource"></span>*
+              <div class="description">(Raise TR 2. Draw 1 Jovian card and 1 Venus card.)</div>
             </div>
           </li>
           <!--P57-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card noneTag prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card noneTag prelude2">
             <div class="title background-color-prelude">Preservation Program</div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P57</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="description" style="font-size:9px">Effect: SKIP THE FIRST TR YOU GAIN EACH GENERATION IN THE ACTION PHASE.</div>
-              <br/>
+              <div class="description" style="font-size:9px">Effect: SKIP THE FIRST TR YOU GAIN EACH GENERATION'S ACTION PHASE.</div>
+              <br />
               <div class="tile rating"></div><div class="tile rating"></div><div class="tile rating"></div>
               <div class="tile rating"></div><div class="tile rating"></div>
-              <br/>
               <div class="description">(Raise TR 5 steps.)</div>
             </div>
           </li>
           <!--P58-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-city tag-plant prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-city tag-plant prelude2">
             <div class="title background-color-prelude">Project Eden</div>
             <div class="tag tag1 tag-city"></div>
             <div class="tag tag2 tag-plant"></div>
             <div class="prelude-label">PRELUDE</div>
-            <div class="number" style="margin-left: 99px">#P58</div>
+            <div class="number" style="margin-left: 50px">#P58</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="tile ocean-tile"></div>
               <div class="tile city-tile"></div>
               <div class="tile greenery-tile"></div>
-              -3<div class="resource card"></div>
-              <br/>
-              <div class="description">(Place 1 ocean, 1 city, and 1 greenery tile. Discard 3 cards.)</div>
+              -3<span class="card resource"></span>
+              <div class="description">(Place 1 ocean, 1 city, 1 greenery. Discard 3 cards.)</div>
             </div>
           </li>
           <!--P59-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card noneTag prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card noneTag prelude2">
             <div class="title background-color-prelude">Recession</div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P59</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="minus"></div><div class="resource money">5</div>*
-              &nbsp;
+              -<span class="money resource">5</span>*
               <div class="production-box production-box-size1a">
                 <div class="production-prefix"><div class="minus"></div></div>
-                <div class="production money">1</div>
+                <div class="money production">1</div>
               </div>*
-              <br/>
-              <div class="resource money">10</div>
-              <br/>
+              <br />
+              <span class="money resource">10</span>
               <div class="description">(Each opponent loses 5 M€ and -1 MC prod. You gain 10 M€.)</div>
             </div>
           </li>
           <!--P60-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card noneTag prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card noneTag prelude2">
             <div class="title background-color-prelude">Rise to Power</div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P60</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="production-box">
-                <div class="production money">3</div>
+                <div class="money production">3</div>
               </div>
-              &nbsp;
-              <div class="resource delegate"></div><div class="resource delegate"></div><div class="resource delegate"></div>*
-              <br/>
-              <div class="description">(+3 MC prod. Place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.)</div>
+              <span class="delegate resource"></span><span class="delegate resource"></span><span class="delegate resource"></span>*
+              <div class="description">(+3 MC prod. Place 3 delegates in separate parties.)</div>
             </div>
           </li>
           <!--P61-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-microbe tag-plant prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-microbe tag-plant prelude2">
             <div class="title background-color-prelude">Soil Bacteria</div>
             <div class="tag tag1 tag-microbe"></div>
             <div class="tag tag2 tag-plant"></div>
             <div class="prelude-label">PRELUDE</div>
-            <div class="number" style="margin-left: 99px">#P61</div>
+            <div class="number" style="margin-left: 50px">#P61</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource-tag tag-plant"></div>/<div class="resource-tag tag-microbe"></div>:
-              <div class="resource plant"></div>
-              <br/>
-              <div class="resource card"></div><div class="resource card"></div>*
-              &nbsp;
-              <div class="resource plant"></div><div class="resource plant"></div><div class="resource plant"></div>
-              <br/>
-              <div class="description">(Effect: When playing plant or microbe tag, gain 1 plant. Draw 2 microbe cards. Gain 3 plants.)</div>
+              <span class="tag-plant resource-tag"></span>/<span class="tag-microbe resource-tag"></span> :
+              <span class="plant resource"></span>
+              <br />
+              <span class="card resource"></span><span class="card resource"></span>*
+              <span class="plant resource"></span><span class="plant resource"></span><span class="plant resource"></span>
+              <div class="description">(Effect: When playing plant or microbe tag gain 1 plant. Draw 2 microbe cards. Gain 3 plants.)</div>
             </div>
           </li>
           <!--P62-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space tag-jovian tag-earth tag-venus prelude2 "
-          >
-            <div class="title background-color-prelude">Space Lanes</div>
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space tag-jovian tag-earth tag-venus prelude2">
+            <div class="title background-color-prelude" style="font-size:13px">Space Lanes</div>
             <div class="tag tag1 tag-space"></div>
             <div class="tag tag2 tag-jovian"></div>
             <div class="tag tag3 tag-earth"></div>
@@ -16343,21 +16165,15 @@
             <div class="number" style="margin-left: 50px">#P62</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="resource-tag tag-jovian"></div>
-              <div class="resource-tag tag-earth"></div>
-              <div class="resource-tag tag-venus"></div>:
-              <div class="minus"></div><div class="resource money">2</div>
-              <br/>
-              <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>
-              <br/>
-              <div class="description">(Effect: When playing Jovian, Earth, or Venus tag, pay 2 M€ less. Gain 3 titanium.)</div>
+              <span class="tag-jovian resource-tag"></span><span class="tag-earth resource-tag"></span><span class="tag-venus resource-tag"></span> :
+              -<span class="money resource">2</span>
+              <br />
+              <span class="titanium resource"></span><span class="titanium resource"></span><span class="titanium resource"></span>
+              <div class="description">(Effect: When playing Jovian/Earth/Venus tag pay 2 M€ less. Gain 3 titanium.)</div>
             </div>
           </li>
           <!--P63-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-building prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-building prelude2">
             <div class="title background-color-prelude">Suitable Infrastructure</div>
             <div class="tag tag1 tag-building"></div>
             <div class="prelude-label">PRELUDE</div>
@@ -16365,63 +16181,50 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="production-box production-box-size1a">
-                <div class="production wild">1</div>
-              </div>*:
-              <div class="resource money">2</div>
-              <br/>
-              <div class="resource steel"></div><div class="resource steel"></div><div class="resource steel"></div>
-              <div class="resource steel"></div><div class="resource steel"></div>
-              <br/>
-              <div class="description">(Effect: Once per action, if you increase any production, gain 2 M€. Gain 5 steel.)</div>
+                <div class="production money">1</div>
+              </div>* :
+              <span class="money resource">2</span>
+              <br />
+              <span class="steel resource"></span><span class="steel resource"></span><span class="steel resource"></span>
+              <span class="steel resource"></span><span class="steel resource"></span>
+              <div class="description">(Effect: Once per action, if you increase any production gain 2 M€. Gain 5 steel.)</div>
             </div>
           </li>
           <!--P64-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-earth prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-earth prelude2">
             <div class="title background-color-prelude">Terraforming Deal</div>
             <div class="tag tag1 tag-earth"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P64</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="tile rating"></div>:
-              <div class="resource money">2</div>
-              <br/>
+              <div class="tile rating"></div> :
+              <span class="money resource">2</span>
+              <br />
               <div class="production-box">
-                <div class="production money">2</div>
+                <div class="money production">2</div>
               </div>
-              <br/>
               <div class="description">(Effect: Each TR step you gain, gain 2 M€. +2 MC production.)</div>
             </div>
           </li>
           <!--P65-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-venus prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-venus prelude2">
             <div class="title background-color-prelude">Venus Contract</div>
             <div class="tag tag1 tag-venus"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P65</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="tile venus-tile"></div>:
-              <div class="resource money">3</div>
-              <br/>
-              <div class="resource card-venus"></div>
-              &nbsp;
+              <div class="tile venus-tile"></div> :
+              <span class="money resource">3</span>
+              <br />
+              <span class="card resource"></span>*
               <div class="tile rating"></div>
-              <br/>
-              <div class="description">(Effect: Each Venus step you raise, gain 3 M€. Draw 1 Venus card. Raise TR 1 step.)</div>
+              <div class="description">(Effect: Each Venus step you raise gain 3 M€. Draw 1 Venus card. Raise TR 1.)</div>
             </div>
           </li>
           <!--P66-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-space prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-space prelude2">
             <div class="title background-color-prelude">Venus L1 Shade</div>
             <div class="tag tag1 tag-space"></div>
             <div class="prelude-label">PRELUDE</div>
@@ -16429,28 +16232,21 @@
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
               <div class="tile venus-tile"></div><div class="tile venus-tile"></div><div class="tile venus-tile"></div>
-              <br/>
               <div class="description">(Raise Venus 3 steps.)</div>
             </div>
           </li>
           <!--P67-->
-          <li
-            onclick="getClickedCard();"
-            class="filterDiv prelude prelude-card tag-earth prelude2 "
-          >
+          <li onclick="getClickedCard();" class="filterDiv prelude prelude-card tag-earth prelude2">
             <div class="title background-color-prelude">World Government Advisor</div>
             <div class="tag tag1 tag-earth"></div>
             <div class="prelude-label">PRELUDE</div>
             <div class="number" style="margin-left: 99px">#P67</div>
             <div class="prelude-icon preludeCard-icon"></div>
             <div class="content">
-              <div class="description" style="font-size:9px">Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING TR OR BONUSES.</div>
-              <br/>
+              <div class="description" style="font-size:9px">Action: RAISE 1 GLOBAL PARAMETER WITHOUT TR OR BONUSES.</div>
               <div class="tile rating"></div><div class="tile rating"></div>
-              &nbsp;
-              <div class="resource card"></div>
-              <br/>
-              <div class="description">(Raise TR 2 steps. Draw 1 card.)</div>
+              <span class="card resource"></span>
+              <div class="description">(Raise TR 2. Draw 1 card.)</div>
             </div>
           </li>
 
