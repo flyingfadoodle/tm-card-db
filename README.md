@@ -1,7 +1,5 @@
 # Terraforming Mars Database
 
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-
 A complete animated card database for the Terraforming Mars board game.
 
 A fan-made reference site covering all official cards, corporations, and preludes across every expansion and promo pack — built in the style of [ssimeonoff's cards list](https://ssimeonoff.github.io/cards-list).
@@ -17,7 +15,7 @@ A fan-made reference site covering all official cards, corporations, and prelude
 
 ## Background
 
-This project is a fork and extension of [ssimeonoff's Terraforming Mars Cards List](https://github.com/ssimeonoff/ssimeonoff.github.io), with additional content covering expansions and promo cards not included in the original.
+This project is an extension of [ssimeonoff's Terraforming Mars Cards List](https://github.com/ssimeonoff/ssimeonoff.github.io), with additional content covering expansions and promo cards not included in the original (as of June 18th, 2026). Changes were made by me and with assistance from Claude Sonnet 4.6. 
 
 Card images are sourced from [terraforming-mars/card-images](https://github.com/terraforming-mars/card-images) and stored in the `card-images/` folder for reference (not used by the site — cards are rendered in HTML/CSS).
 
