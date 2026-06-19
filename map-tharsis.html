@@ -8,54 +8,34 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #000; font-family: Tahoma, Verdana, sans-serif; }
 
-    /* Tab bar - do not change */
     #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; padding:0 20px; gap:4px; }
     #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
     #tab-bar a:hover { color:#e8c848; }
     #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
 
-    /* Map sub-nav */
-    #map-nav {
-      display: flex;
-      gap: 0;
-      padding: 12px 20px 0;
-      border-bottom: 1px solid #333;
-    }
-    #map-nav button {
-      font-family: Tahoma, sans-serif;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: #888;
-      background: #111;
-      border: 1px solid #333;
-      border-bottom: none;
-      padding: 7px 20px;
-      cursor: pointer;
-      margin-right: 2px;
-      border-radius: 4px 4px 0 0;
-    }
-    #map-nav button.active { color: #e8c848; background: #1a1000; border-color: #8b6914; }
-    #map-nav button:hover:not(.active) { color: #ccc; }
+    #map-nav { display:flex; gap:0; padding:12px 20px 0; border-bottom:1px solid #333; background:#000; }
+    #map-nav button { font-family:Tahoma,sans-serif; font-size:12px; font-weight:bold; letter-spacing:.06em; text-transform:uppercase; color:#888; background:#111; border:1px solid #333; border-bottom:none; padding:7px 20px; cursor:pointer; margin-right:2px; border-radius:4px 4px 0 0; }
+    #map-nav button.active { color:#e8c848; background:#1a1000; border-color:#8b6914; }
+    #map-nav button:hover:not(.active) { color:#ccc; }
 
-    /* Board container - matches original exactly */
-    .board-section { display: none; padding: 20px; }
-    .board-section.active { display: flex; justify-content: center; }
+    .board-section { display:none; padding:20px; justify-content:center; background:#000; }
+    .board-section.active { display:flex; }
 
+    /* Board container - exact from original */
     .board-cont {
       display: inline-block;
       vertical-align: top;
       width: 670px;
       position: relative;
+      margin: 0 auto;
+      margin-top: 20px;
     }
 
-    /* Board background images */
-    .board-tharsis  { background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat; }
-    .board-hellas   { background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat; }
-    .board-elysium  { background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat; }
+    .board-cont.board-without-venus {
+      background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat;
+    }
 
-    /* The hex grid - exact match to original */
+    /* Hex grid - exact */
     .board {
       width: 600px;
       height: 488px;
@@ -63,34 +43,24 @@
       position: relative;
     }
 
-    /* Each hex space - exact from board.less */
+    /* Board spaces - exact from board.less */
     .board-space {
-      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 51px;
       position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    /* Space type colors */
-    .board-space--ocean   { background: rgba(10, 90, 200, 0.7); }
-    .board-space--land    { background: rgba(0,0,0,0); }
-    .board-space--volcanic { background: rgba(0,0,0,0); }
-    .board-space--restricted { background: rgba(0,0,0,0.5); }
-
-    /* Volcanic border - using outline trick via box-shadow won't work with clip-path
-       Use a wrapper with a pseudo element instead */
-    .board-space-wrap { position: absolute; }
-    .board-space-wrap.volcanic::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
+    .board-space-type-land {
+      background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/hex_white.png') no-repeat;
+    }
+    .board-space-type-land-volcanic {
+      background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/hex_volcanic.png');
+      background-color: rgba(136,0,0,0.2);
+    }
+    .board-space-type-ocean {
+      background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/hex_blue.png') no-repeat;
       clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-      background: rgba(255,180,0,0.25);
-      pointer-events: none;
-      z-index: 2;
+      background-color: rgba(0,170,255,0.25);
     }
 
     /* Bonus icons - exact from board.less */
@@ -104,22 +74,25 @@
       background-size: 16px;
       background-repeat: no-repeat;
     }
-    .board-space-bonus-pos--only { margin: 14px 0 0 14px; }
-    .board-space-bonus-pos--1    { margin: 14px 0 0 5px; }
-    .board-space-bonus-pos--2    { margin: 14px 0 0 23px; }
+    .board-space-bonus-pos--only { margin: 15px 0 0 14px; }
+    .board-space-bonus-pos--1    { margin: 15px 0 0 5px; }
+    .board-space-bonus-pos--2    { margin: 15px 0 0 23px; }
     .board-space-bonus-pos--3    { margin: 23px 0 0 14px; }
-
     .board-space-bonus--plant    { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/plant.png'); }
     .board-space-bonus--steel    { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/steel.png'); }
     .board-space-bonus--titanium { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/titanium.png'); }
     .board-space-bonus--card     { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/card.png'); height: 20px; }
     .board-space-bonus--heat     { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/heat.png'); }
     .board-space-bonus--bonusocean {
-      background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/colony.png');
-      background-size: 32px 21px; width: 36px; height: 21px;
+      background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/tiles/ocean.png'),
+                        url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/misc/hellas-ocean-cost.png');
+      background-repeat: no-repeat, no-repeat;
+      background-size: 21px, 12px;
+      background-position: left, 23px;
+      width: 35px; height: 24px;
     }
 
-    /* Hex positions - exact from board_items_positions.less */
+    /* Hex positions */
     .board-space-03 { margin: 34px 0 0 104px; }
     .board-space-04 { margin: 34px 0 0 153px; }
     .board-space-05 { margin: 34px 0 0 202px; }
@@ -182,7 +155,114 @@
     .board-space-62 { margin: 362px 0 0 251px; }
     .board-space-63 { margin: 362px 0 0 300px; }
 
-    /* SVG legend overlay */
+    /* Outer colony spaces */
+    .board-outer-spaces { position: absolute; }
+    .board-space-01 { margin: 165px 0 0 -5px; }
+    .board-space-02 { margin: 78px 0 0 36px; }
+
+    /* Outer space text labels */
+    .board-space-text {
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 11px;
+      text-align: center;
+      position: absolute;
+      margin: -25px 0 0 -20px;
+      width: 88px;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    /* Global parameter tracks - exact positions from globs.less */
+    .global-numbers {
+      font-family: Prototype, sans-serif;
+      font-size: 14px;
+      margin: 11px 0 0 16px;
+    }
+    .global-numbers-value {
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      border-radius: 5px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+    }
+    .val-is-active {
+      color: white !important;
+      box-shadow: 0 0px 0px 2px #222, 0px 0 0px 6px #bb8760, 0 0 2px 8px #000;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Temperature values - exact positions */
+    .global-numbers-temperature .val--30 { position:absolute; margin: 508px 0 0 438px; transform:rotate(55deg); }
+    .global-numbers-temperature .val--28 { position:absolute; margin: 493px 0 0 458px; transform:rotate(52deg); }
+    .global-numbers-temperature .val--26 { position:absolute; margin: 478px 0 0 474px; transform:rotate(48deg); }
+    .global-numbers-temperature .val--24 { position:absolute; margin: 461px 0 0 490px; transform:rotate(43deg); }
+    .global-numbers-temperature .val--22 { position:absolute; margin: 443px 0 0 504px; transform:rotate(36deg); }
+    .global-numbers-temperature .val--20 { position:absolute; margin: 423px 0 0 517px; transform:rotate(33deg); }
+    .global-numbers-temperature .val--18 { position:absolute; margin: 403px 0 0 528px; transform:rotate(25deg); }
+    .global-numbers-temperature .val--16 { position:absolute; margin: 381px 0 0 537px; transform:rotate(22deg); }
+    .global-numbers-temperature .val--14 { position:absolute; margin: 360px 0 0 544px; transform:rotate(17deg); }
+    .global-numbers-temperature .val--12 { position:absolute; margin: 337px 0 0 549px; transform:rotate(12deg); }
+    .global-numbers-temperature .val--10 { position:absolute; margin: 314px 0 0 553px; transform:rotate(8deg); }
+    .global-numbers-temperature .val--8  { position:absolute; margin: 291px 0 0 554px; transform:rotate(0deg); }
+    .global-numbers-temperature .val--6  { position:absolute; margin: 268px 0 0 554px; transform:rotate(-3deg); }
+    .global-numbers-temperature .val--4  { position:absolute; margin: 244px 0 0 551px; transform:rotate(-11deg); }
+    .global-numbers-temperature .val--2  { position:absolute; margin: 222px 0 0 546px; transform:rotate(-14deg); }
+    .global-numbers-temperature .val-0   { position:absolute; margin: 199px 0 0 540px; transform:rotate(-20deg); }
+    .global-numbers-temperature .val-2   { position:absolute; margin: 177px 0 0 531px; transform:rotate(-24deg); }
+    .global-numbers-temperature .val-4   { position:absolute; margin: 156px 0 0 521px; transform:rotate(-30deg); }
+    .global-numbers-temperature .val-6   { position:absolute; margin: 137px 0 0 509px; transform:rotate(-33deg); }
+    .global-numbers-temperature .val-8   { position:absolute; margin: 117px 0 0 494px; transform:rotate(-40deg); }
+
+    /* Oxygen values */
+    .global-numbers-oxygen .val-0  { position:absolute; margin: 500px 0 0 125px; transform:rotate(-54deg); }
+    .global-numbers-oxygen .val-1  { position:absolute; margin: 482px 0 0 104px; transform:rotate(-48deg); }
+    .global-numbers-oxygen .val-2  { position:absolute; margin: 460px 0 0 82px;  transform:rotate(-43deg); }
+    .global-numbers-oxygen .val-3  { position:absolute; margin: 435px 0 0 64px;  transform:rotate(-37deg); }
+    .global-numbers-oxygen .val-4  { position:absolute; margin: 411px 0 0 49px;  transform:rotate(-30deg); }
+    .global-numbers-oxygen .val-5  { position:absolute; margin: 383px 0 0 37px;  transform:rotate(-22deg); }
+    .global-numbers-oxygen .val-6  { position:absolute; margin: 355px 0 0 28px;  transform:rotate(-15deg); }
+    .global-numbers-oxygen .val-7  { position:absolute; margin: 325px 0 0 23px;  transform:rotate(-10deg); }
+    .global-numbers-oxygen .val-8  { position:absolute; margin: 295px 0 0 20px;  transform:rotate(-2deg); }
+    .global-numbers-oxygen .val-9  { position:absolute; margin: 265px 0 0 21px;  transform:rotate(6deg); }
+    .global-numbers-oxygen .val-10 { position:absolute; margin: 236px 0 0 25px;  transform:rotate(12deg); }
+    .global-numbers-oxygen .val-11 { position:absolute; margin: 207px 0 0 32px;  transform:rotate(19deg); }
+    .global-numbers-oxygen .val-12 { position:absolute; margin: 179px 0 0 43px;  transform:rotate(25deg); }
+    .global-numbers-oxygen .val-13 { position:absolute; margin: 153px 0 0 56px;  transform:rotate(31deg); }
+    .global-numbers-oxygen .val-14 { position:absolute; margin: 128px 0 0 72px;  transform:rotate(37deg); }
+
+    /* Venus values */
+    .global-numbers-venus .val-0  { position:absolute; margin: 88px 0 0 107px;  transform:rotate(-45deg); }
+    .global-numbers-venus .val-2  { position:absolute; margin: 72px 0 0 129px;  transform:rotate(-36deg); }
+    .global-numbers-venus .val-4  { position:absolute; margin: 58px 0 0 150px;  transform:rotate(-33deg); }
+    .global-numbers-venus .val-6  { position:absolute; margin: 46px 0 0 173px;  transform:rotate(-26deg); }
+    .global-numbers-venus .val-8  { position:absolute; margin: 36px 0 0 197px;  transform:rotate(-20deg); }
+    .global-numbers-venus .val-10 { position:absolute; margin: 28px 0 0 222px;  transform:rotate(-15deg); }
+    .global-numbers-venus .val-12 { position:absolute; margin: 23px 0 0 247px;  transform:rotate(-8deg); }
+    .global-numbers-venus .val-14 { position:absolute; margin: 20px 0 0 274px;  transform:rotate(-2deg); }
+    .global-numbers-venus .val-16 { position:absolute; margin: 20px 0 0 301px;  transform:rotate(4deg); }
+    .global-numbers-venus .val-18 { position:absolute; margin: 23px 0 0 327px;  transform:rotate(9deg); }
+    .global-numbers-venus .val-20 { position:absolute; margin: 28px 0 0 352px;  transform:rotate(15deg); }
+    .global-numbers-venus .val-22 { position:absolute; margin: 36px 0 0 377px;  transform:rotate(21deg); }
+    .global-numbers-venus .val-24 { position:absolute; margin: 46px 0 0 401px;  transform:rotate(27deg); }
+    .global-numbers-venus .val-26 { position:absolute; margin: 58px 0 0 425px;  transform:rotate(31deg); }
+    .global-numbers-venus .val-28 { position:absolute; margin: 72px 0 0 446px;  transform:rotate(35deg); }
+    .global-numbers-venus .val-30 { position:absolute; margin: 88px 0 0 466px;  transform:rotate(42deg); }
+
+    /* Oceans counter */
+    .global-numbers-oceans {
+      position: absolute;
+      text-align: left;
+      color: #3682b4;
+      font-family: Prototype, sans-serif;
+      font-size: 30px;
+      margin: 524px 0 0 286px;
+    }
+
+    /* SVG legend */
     .board-legend {
       position: absolute;
       margin: -67px 0 0 -100px;
@@ -194,14 +274,24 @@
       font-size: 10px;
       font-weight: bold;
       fill: white;
-      pointer-events: none;
     }
     .board-line {
       stroke: white;
       stroke-width: 3;
       stroke-opacity: 0.3;
-      pointer-events: none;
     }
+
+    /* Parameter icons on board edge */
+    .global-param-icon {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .param-temp-icon  { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/global-parameters/temperature.png'); margin: 590px 0 0 430px; }
+    .param-oxy-icon   { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/global-parameters/oxygen.png'); margin: 590px 0 0 115px; }
+    .param-venus-icon { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/global-parameters/venus.png'); margin: 3px 0 0 278px; }
   </style>
 </head>
 <body>
@@ -218,138 +308,164 @@
   <button onclick="showMap('elysium', this)">Elysium</button>
 </div>
 
-<!-- THARSIS -->
 <div id="map-tharsis" class="board-section active">
-  <div class="board-cont board-tharsis" id="board-tharsis-cont"></div>
+  <div class="board-cont board-without-venus" id="board-tharsis-cont"></div>
 </div>
-
-<!-- HELLAS -->
 <div id="map-hellas" class="board-section">
-  <div class="board-cont board-hellas" id="board-hellas-cont"></div>
+  <div class="board-cont board-without-venus" id="board-hellas-cont"></div>
 </div>
-
-<!-- ELYSIUM -->
 <div id="map-elysium" class="board-section">
-  <div class="board-cont board-elysium" id="board-elysium-cont"></div>
+  <div class="board-cont board-without-venus" id="board-elysium-cont"></div>
 </div>
 
 <script>
-const P = 'plant', S = 'steel', T = 'titanium', C = 'card', H = 'heat', O = 'bonusocean';
+const P='plant', S='steel', T='titanium', C='card', H='heat', O='bonusocean';
 
-// Board data: [id, type, bonuses]
-// type: L=land, V=volcanic, O=ocean
 const THARSIS = [
-  // y=0
-  ['03','L',[S,S]], ['04','O',[S,S]], ['05','L',[]], ['06','O',[C]], ['07','O',[]],
-  // y=1
-  ['08','L',[]], ['09','V',[S]], ['10','L',[]], ['11','L',[]], ['12','L',[]], ['13','O',[C,C]],
-  // y=2
-  ['14','V',[C]], ['15','L',[]], ['16','L',[]], ['17','L',[]], ['18','L',[]], ['19','L',[]], ['20','L',[S]],
-  // y=3
-  ['21','V',[P,T]], ['22','L',[P]], ['23','L',[P]], ['24','L',[P]], ['25','L',[P,P]], ['26','L',[P]], ['27','L',[P]], ['28','O',[P,P]],
-  // y=4
-  ['29','V',[P,P]], ['30','L',[P,P]], ['31','L',[P,P]], ['32','O',[P,P]], ['33','O',[P,P]], ['34','O',[P,P]], ['35','L',[P,P]], ['36','L',[P,P]], ['37','L',[P,P]],
-  // y=5
-  ['38','L',[P]], ['39','L',[P,P]], ['40','L',[P]], ['41','L',[P]], ['42','L',[P]], ['43','O',[P]], ['44','O',[P]], ['45','O',[P]],
-  // y=6
-  ['46','L',[]], ['47','L',[]], ['48','L',[]], ['49','L',[]], ['50','L',[]], ['51','L',[P]], ['52','L',[]],
-  // y=7
-  ['53','L',[S,S]], ['54','L',[]], ['55','L',[C]], ['56','L',[C]], ['57','L',[]], ['58','L',[T]],
-  // y=8
-  ['59','L',[S]], ['60','L',[S,S]], ['61','L',[]], ['62','L',[]], ['63','O',[T,T]],
+  ['03','L',[S,S]],['04','O',[S,S]],['05','L',[]],['06','O',[C]],['07','O',[]],
+  ['08','L',[]],['09','V',[S]],['10','L',[]],['11','L',[]],['12','L',[]],['13','O',[C,C]],
+  ['14','V',[C]],['15','L',[]],['16','L',[]],['17','L',[]],['18','L',[]],['19','L',[]],['20','L',[S]],
+  ['21','V',[P,T]],['22','L',[P]],['23','L',[P]],['24','L',[P]],['25','L',[P,P]],['26','L',[P]],['27','L',[P]],['28','O',[P,P]],
+  ['29','V',[P,P]],['30','L',[P,P]],['31','L',[P,P]],['32','O',[P,P]],['33','O',[P,P]],['34','O',[P,P]],['35','L',[P,P]],['36','L',[P,P]],['37','L',[P,P]],
+  ['38','L',[P]],['39','L',[P,P]],['40','L',[P]],['41','L',[P]],['42','L',[P]],['43','O',[P]],['44','O',[P]],['45','O',[P]],
+  ['46','L',[]],['47','L',[]],['48','L',[]],['49','L',[]],['50','L',[]],['51','L',[P]],['52','L',[]],
+  ['53','L',[S,S]],['54','L',[]],['55','L',[C]],['56','L',[C]],['57','L',[]],['58','L',[T]],
+  ['59','L',[S]],['60','L',[S,S]],['61','L',[]],['62','L',[]],['63','O',[T,T]],
 ];
 
 const HELLAS = [
-  // y=0
-  ['03','O',[P,P]], ['04','L',[P,P]], ['05','L',[P,P]], ['06','L',[P,S]], ['07','L',[P]],
-  // y=1
-  ['08','O',[P,P]], ['09','L',[P,P]], ['10','L',[P]], ['11','L',[P,S]], ['12','L',[P]], ['13','L',[P]],
-  // y=2
-  ['14','O',[P]], ['15','L',[P]], ['16','L',[S]], ['17','L',[S]], ['18','L',[]], ['19','L',[P,P]], ['20','L',[P,C]],
-  // y=3
-  ['21','O',[P]], ['22','L',[P]], ['23','L',[S]], ['24','L',[S,S]], ['25','L',[S]], ['26','O',[P]], ['27','O',[P]], ['28','L',[P]],
-  // y=4
-  ['29','L',[C]], ['30','L',[]], ['31','L',[]], ['32','L',[S,S]], ['33','L',[]], ['34','O',[C]], ['35','O',[H,H,H]], ['36','O',[]], ['37','L',[P]],
-  // y=5
-  ['38','L',[T]], ['39','L',[]], ['40','L',[S]], ['41','L',[]], ['42','L',[]], ['43','O',[]], ['44','O',[S]], ['45','L',[]],
-  // y=6
-  ['46','O',[T,T]], ['47','L',[]], ['48','L',[]], ['49','L',[C]], ['50','L',[]], ['51','L',[]], ['52','L',[T]],
-  // y=7
-  ['53','L',[S]], ['54','L',[C]], ['55','L',[H,H]], ['56','L',[H,H]], ['57','L',[T]], ['58','L',[T]],
-  // y=8
-  ['59','L',[]], ['60','L',[H,H]], ['61','L',[O]], ['62','L',[H,H]], ['63','L',[]],
+  ['03','O',[P,P]],['04','L',[P,P]],['05','L',[P,P]],['06','L',[P,S]],['07','L',[P]],
+  ['08','O',[P,P]],['09','L',[P,P]],['10','L',[P]],['11','L',[P,S]],['12','L',[P]],['13','L',[P]],
+  ['14','O',[P]],['15','L',[P]],['16','L',[S]],['17','L',[S]],['18','L',[]],['19','L',[P,P]],['20','L',[P,C]],
+  ['21','O',[P]],['22','L',[P]],['23','L',[S]],['24','L',[S,S]],['25','L',[S]],['26','O',[P]],['27','O',[P]],['28','L',[P]],
+  ['29','L',[C]],['30','L',[]],['31','L',[]],['32','L',[S,S]],['33','L',[]],['34','O',[C]],['35','O',[H,H,H]],['36','O',[]],['37','L',[P]],
+  ['38','L',[T]],['39','L',[]],['40','L',[S]],['41','L',[]],['42','L',[]],['43','O',[]],['44','O',[S]],['45','L',[]],
+  ['46','O',[T,T]],['47','L',[]],['48','L',[]],['49','L',[C]],['50','L',[]],['51','L',[]],['52','L',[T]],
+  ['53','L',[S]],['54','L',[C]],['55','L',[H,H]],['56','L',[H,H]],['57','L',[T]],['58','L',[T]],
+  ['59','L',[]],['60','L',[H,H]],['61','L',[O]],['62','L',[H,H]],['63','L',[]],
 ];
 
 const ELYSIUM = [
-  // y=0
-  ['03','O',[]], ['04','O',[T]], ['05','O',[C]], ['06','O',[S]], ['07','L',[C]],
-  // y=1
-  ['08','V',[T]], ['09','L',[]], ['10','L',[]], ['11','O',[]], ['12','O',[]], ['13','L',[S,S]],
-  // y=2
-  ['14','V',[T,T]], ['15','L',[]], ['16','L',[C]], ['17','L',[]], ['18','O',[P]], ['19','O',[]], ['20','V',[C,C,C]],
-  // y=3
-  ['21','L',[P]], ['22','L',[P]], ['23','L',[P]], ['24','O',[P,P]], ['25','L',[P]], ['26','O',[P]], ['27','O',[P]], ['28','L',[P,S]],
-  // y=4
-  ['29','L',[P,P]], ['30','L',[P,P]], ['31','L',[P,P]], ['32','O',[P,P]], ['33','L',[P,P]], ['34','L',[P,P,P]], ['35','L',[P,P]], ['36','L',[P,P]], ['37','V',[P,T]],
-  // y=5
-  ['38','L',[S]], ['39','L',[P]], ['40','L',[P]], ['41','L',[P]], ['42','L',[P]], ['43','L',[P]], ['44','L',[P]], ['45','L',[]],
-  // y=6
-  ['46','L',[T]], ['47','L',[S]], ['48','L',[]], ['49','L',[]], ['50','L',[S]], ['51','L',[]], ['52','L',[]],
-  // y=7
-  ['53','L',[S,S]], ['54','L',[]], ['55','L',[]], ['56','L',[]], ['57','L',[S,S]], ['58','L',[]],
-  // y=8
-  ['59','L',[S]], ['60','L',[]], ['61','L',[C]], ['62','L',[C]], ['63','L',[S,S]],
+  ['03','O',[]],['04','O',[T]],['05','O',[C]],['06','O',[S]],['07','L',[C]],
+  ['08','V',[T]],['09','L',[]],['10','L',[]],['11','O',[]],['12','O',[]],['13','L',[S,S]],
+  ['14','V',[T,T]],['15','L',[]],['16','L',[C]],['17','L',[]],['18','O',[P]],['19','O',[]],['20','V',[C,C,C]],
+  ['21','L',[P]],['22','L',[P]],['23','L',[P]],['24','O',[P,P]],['25','L',[P]],['26','O',[P]],['27','O',[P]],['28','L',[P,S]],
+  ['29','L',[P,P]],['30','L',[P,P]],['31','L',[P,P]],['32','O',[P,P]],['33','L',[P,P]],['34','L',[P,P,P]],['35','L',[P,P]],['36','L',[P,P]],['37','V',[P,T]],
+  ['38','L',[S]],['39','L',[P]],['40','L',[P]],['41','L',[P]],['42','L',[P]],['43','L',[P]],['44','L',[P]],['45','L',[]],
+  ['46','L',[T]],['47','L',[S]],['48','L',[]],['49','L',[]],['50','L',[S]],['51','L',[]],['52','L',[]],
+  ['53','L',[S,S]],['54','L',[]],['55','L',[]],['56','L',[]],['57','L',[S,S]],['58','L',[]],
+  ['59','L',[S]],['60','L',[]],['61','L',[C]],['62','L',[C]],['63','L',[S,S]],
 ];
 
-const LEGENDS = {
-  tharsis: `<g transform="translate(95,192)"><text class="board-caption"><tspan dy="15">Ascraeus</tspan><tspan x="12" dy="12">Mons</tspan></text><line x1="38" y1="20" x2="88" y2="26" class="board-line"/><text x="86" y="29" class="board-caption" fill="white">●</text></g>
-<g transform="translate(90,230)"><text class="board-caption"><tspan dy="15">Pavonis</tspan><tspan x="4" dy="12">Mons</tspan></text><line x1="35" y1="25" x2="72" y2="30" class="board-line"/><text x="66" y="33" class="board-caption" fill="white">●</text></g>
-<g transform="translate(77,275)"><text class="board-caption"><tspan dy="15">Arsia</tspan><tspan x="-2" dy="12">Mons</tspan></text><line x1="25" y1="20" x2="49" y2="26" class="board-line"/><text x="47" y="29" class="board-caption" fill="white">●</text></g>
-<g transform="translate(85,175)"><text class="board-caption" dx="47"><tspan dy="-7">Tharsis</tspan><tspan dy="12" x="48">Tholus</tspan></text><line y1="-3" x2="160" y2="2" class="board-line" x1="90"/><text x="158" y="5" class="board-caption" fill="white">●</text></g>
-<g transform="translate(85,320)"><text class="board-caption"><tspan dy="15">Noctis</tspan><tspan x="7" dy="12">City</tspan></text><line x1="30" y1="20" x2="140" y2="-20" class="board-line"/><text x="136" y="-18" class="board-caption" fill="white">●</text></g>`,
-
-  hellas: `<g transform="translate(230,420)"><text class="board-caption"><tspan dy="15">Hellas</tspan><tspan x="2" dy="12">Sea</tspan></text><line x1="30" y1="10" x2="55" y2="-30" class="board-line"/><text x="53" y="-27" class="board-caption" fill="white">●</text></g>`,
-
-  elysium: `<g transform="translate(110,190)"><text class="board-caption"><tspan dy="15">Elysium</tspan><tspan x="8" dy="12">Mons</tspan></text></g>
-<g transform="translate(130,150)"><text class="board-caption"><tspan dy="15">Hecatus</tspan><tspan x="3" dy="12">Tholus</tspan></text></g>
-<g transform="translate(545,272)"><text class="board-caption"><tspan dy="15">Arsia</tspan><tspan x="0" dy="12">Mons</tspan></text></g>
-<g transform="translate(505,190)"><text class="board-caption"><tspan x="-5" dy="15">Olympus</tspan><tspan x="4" dy="12">Mons</tspan></text></g>`,
+const OUTER = {
+  tharsis: [
+    {id:'01', label:'Ganymede\nColony'},
+    {id:'02', label:'Phobos\nSpace Haven'},
+  ],
+  hellas: [
+    {id:'01', label:'Ganymede\nColony'},
+    {id:'02', label:'Phobos\nSpace Haven'},
+  ],
+  elysium: [
+    {id:'01', label:'Ganymede\nColony'},
+    {id:'02', label:'Phobos\nSpace Haven'},
+  ],
 };
 
-function bonusClass(b) {
-  const map = {plant:'plant', steel:'steel', titanium:'titanium', card:'card', heat:'heat', bonusocean:'bonusocean'};
-  return 'board-space-bonus board-space-bonus--' + map[b];
-}
+const LEGENDS = {
+  tharsis: `
+    <g transform="translate(95,192)">
+      <text class="board-caption"><tspan dy="15">Ascraeus</tspan><tspan x="12" dy="12">Mons</tspan></text>
+      <line x1="38" y1="20" x2="88" y2="26" class="board-line"/>
+      <text x="86" y="29" class="board-caption">●</text>
+    </g>
+    <g transform="translate(90,230)">
+      <text class="board-caption"><tspan dy="15">Pavonis</tspan><tspan x="4" dy="12">Mons</tspan></text>
+      <line x1="35" y1="25" x2="72" y2="30" class="board-line"/>
+      <text x="66" y="33" class="board-caption">●</text>
+    </g>
+    <g transform="translate(77,275)">
+      <text class="board-caption"><tspan dy="15">Arsia</tspan><tspan x="-2" dy="12">Mons</tspan></text>
+      <line x1="25" y1="20" x2="49" y2="26" class="board-line"/>
+      <text x="47" y="29" class="board-caption">●</text>
+    </g>
+    <g transform="translate(85,175)">
+      <text class="board-caption" dx="47"><tspan dy="-7">Tharsis</tspan><tspan dy="12" x="48">Tholus</tspan></text>
+      <line y1="-3" x2="160" y2="2" class="board-line" x1="90"/>
+      <text x="158" y="5" class="board-caption">●</text>
+    </g>
+    <g transform="translate(85,320)">
+      <text class="board-caption"><tspan dy="15">Noctis</tspan><tspan x="7" dy="12">City</tspan></text>
+      <line x1="30" y1="20" x2="140" y2="-20" class="board-line"/>
+      <text x="136" y="-18" class="board-caption">●</text>
+    </g>`,
+  hellas: `
+    <g transform="translate(240,440)">
+      <text class="board-caption"><tspan dy="0">Hellas Sea</tspan></text>
+      <line x1="35" y1="-2" x2="55" y2="-50" class="board-line"/>
+      <text x="52" y="-48" class="board-caption">●</text>
+    </g>`,
+  elysium: `
+    <g transform="translate(110,190)">
+      <text class="board-caption"><tspan dy="15">Elysium</tspan><tspan x="8" dy="12">Mons</tspan></text>
+    </g>
+    <g transform="translate(130,150)">
+      <text class="board-caption"><tspan dy="15">Hecatus</tspan><tspan x="3" dy="12">Tholus</tspan></text>
+    </g>
+    <g transform="translate(545,272)">
+      <text class="board-caption"><tspan dy="15">Arsia</tspan><tspan dy="12" x="0">Mons</tspan></text>
+    </g>
+    <g transform="translate(505,190)">
+      <text class="board-caption"><tspan x="-5" dy="15">Olympus</tspan><tspan x="4" dy="12">Mons</tspan></text>
+    </g>`,
+};
+
+const TEMP_VALS   = [-30,-28,-26,-24,-22,-20,-18,-16,-14,-12,-10,-8,-6,-4,-2,0,2,4,6,8];
+const OXY_VALS    = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+const VENUS_VALS  = [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30];
 
 function bonusPos(i, total) {
-  if (total === 1) return ' board-space-bonus-pos--only';
-  if (i === 0) return ' board-space-bonus-pos--1';
-  if (i === 1) return ' board-space-bonus-pos--2';
-  return ' board-space-bonus-pos--3';
+  if (total === 1) return 'board-space-bonus-pos--only';
+  if (i === 0) return 'board-space-bonus-pos--1';
+  if (i === 1) return 'board-space-bonus-pos--2';
+  return 'board-space-bonus-pos--3';
 }
 
-function buildBoard(containerId, spaces, legendKey) {
-  const cont = document.getElementById(containerId);
-  
-  // Build inner board div
+function buildBoard(contId, spaces, outerSpaces, legendKey) {
+  const cont = document.getElementById(contId);
+
+  // Outer spaces (Ganymede, Phobos)
+  const outerDiv = document.createElement('div');
+  outerDiv.className = 'board-outer-spaces';
+  outerSpaces.forEach(({id, label}) => {
+    const sp = document.createElement('div');
+    sp.className = `board-space board-space-${id} board-space-type-land`;
+    const txt = document.createElement('div');
+    txt.className = 'board-space-text';
+    txt.textContent = label.replace('\\n', '\n');
+    sp.appendChild(txt);
+    outerDiv.appendChild(sp);
+  });
+  cont.appendChild(outerDiv);
+
+  // Main board
   const board = document.createElement('div');
   board.className = 'board';
 
   spaces.forEach(([id, type, bonuses]) => {
-    const wrap = document.createElement('div');
-    wrap.className = `board-space-wrap${type === 'V' ? ' volcanic' : ''}`;
-
-    const space = document.createElement('div');
-    space.className = `board-space board-space-${id} board-space--${type === 'O' ? 'ocean' : type === 'V' ? 'volcanic' : 'land'}`;
+    const sp = document.createElement('div');
+    const typeClass = type === 'O' ? 'board-space-type-ocean'
+                    : type === 'V' ? 'board-space-type-land-volcanic'
+                    : 'board-space-type-land';
+    sp.className = `board-space board-space-${id} ${typeClass}`;
 
     bonuses.forEach((b, i) => {
       const icon = document.createElement('div');
-      icon.className = bonusClass(b) + bonusPos(i, bonuses.length);
-      space.appendChild(icon);
+      icon.className = `board-space-bonus board-space-bonus--${b} ${bonusPos(i, bonuses.length)}`;
+      sp.appendChild(icon);
     });
 
-    wrap.appendChild(space);
-    board.appendChild(wrap);
+    board.appendChild(sp);
   });
 
   // SVG legend
@@ -358,14 +474,67 @@ function buildBoard(containerId, spaces, legendKey) {
   svg.setAttribute('width', '630');
   svg.setAttribute('class', 'board-legend');
   svg.innerHTML = LEGENDS[legendKey] || '';
-
   board.appendChild(svg);
+
   cont.appendChild(board);
+
+  // Global parameter tracks
+  const gn = document.createElement('div');
+  gn.className = 'global-numbers';
+
+  // Temperature track
+  const tempDiv = document.createElement('div');
+  tempDiv.className = 'global-numbers-temperature';
+  TEMP_VALS.forEach(v => {
+    const el = document.createElement('div');
+    const cls = v < 0 ? `val--${Math.abs(v)}` : `val-${v}`;
+    el.className = `global-numbers-value ${cls}`;
+    el.textContent = v > 0 ? `+${v}` : `${v}`;
+    tempDiv.appendChild(el);
+  });
+  gn.appendChild(tempDiv);
+
+  // Oxygen track
+  const oxyDiv = document.createElement('div');
+  oxyDiv.className = 'global-numbers-oxygen';
+  OXY_VALS.forEach(v => {
+    const el = document.createElement('div');
+    el.className = `global-numbers-value val-${v}`;
+    el.textContent = v === 14 ? '14%' : `${v}`;
+    oxyDiv.appendChild(el);
+  });
+  gn.appendChild(oxyDiv);
+
+  // Venus track
+  const venusDiv = document.createElement('div');
+  venusDiv.className = 'global-numbers-venus';
+  VENUS_VALS.forEach(v => {
+    const el = document.createElement('div');
+    el.className = `global-numbers-value val-${v}`;
+    el.textContent = v === 30 ? '30%' : `${v}`;
+    venusDiv.appendChild(el);
+  });
+  gn.appendChild(venusDiv);
+
+  // Oceans counter
+  const oceansDiv = document.createElement('div');
+  oceansDiv.className = 'global-numbers-oceans';
+  oceansDiv.textContent = '0/9';
+  gn.appendChild(oceansDiv);
+
+  cont.appendChild(gn);
+
+  // Parameter icons
+  ['param-temp-icon','param-oxy-icon','param-venus-icon'].forEach(cls => {
+    const icon = document.createElement('div');
+    icon.className = `global-param-icon ${cls}`;
+    cont.appendChild(icon);
+  });
 }
 
-buildBoard('board-tharsis-cont', THARSIS, 'tharsis');
-buildBoard('board-hellas-cont', HELLAS, 'hellas');
-buildBoard('board-elysium-cont', ELYSIUM, 'elysium');
+buildBoard('board-tharsis-cont', THARSIS, OUTER.tharsis, 'tharsis');
+buildBoard('board-hellas-cont',  HELLAS,  OUTER.hellas,  'hellas');
+buildBoard('board-elysium-cont', ELYSIUM, OUTER.elysium, 'elysium');
 
 function showMap(name, btn) {
   document.querySelectorAll('.board-section').forEach(s => s.classList.remove('active'));
