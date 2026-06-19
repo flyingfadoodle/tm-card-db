@@ -16,79 +16,10 @@
   
   
 
-  <style>
-    #site-nav {
-      display: inline-flex;
-      align-items: center;
-      gap: 2px;
-      margin-left: 20px;
-      vertical-align: middle;
-    }
-    #site-nav .nav-btn {
-      font-family: Prototype, serif;
-      font-size: 11px;
-      letter-spacing: .06em;
-      color: #888;
-      background: rgba(0,0,0,0.3);
-      border: 1px solid #555;
-      border-radius: 4px;
-      padding: 5px 12px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: color .15s, background .15s;
-    }
-    #site-nav .nav-btn:hover { color: #ccc; background: rgba(0,0,0,0.5); }
-    #site-nav .nav-btn.active { color: #e8c848; background: rgba(0,0,0,0.5); border-color: #8b6914; }
-
-    .site-section { display: none; }
-    .site-section.active { display: block; }
-
-    #section-awards, #section-maps {
-      min-height: 850px;
-    }
-    #section-awards .app-container,
-    #section-maps .app-container {
-      max-width: 1750px;
-      height: 850px;
-      padding-top: 20px;
-      margin: auto;
-      background-repeat: no-repeat;
-      background: linear-gradient(to top, #000, transparent 20%),
-        linear-gradient(to left top, #000, transparent 20%),
-        linear-gradient(to right top, #000, transparent 20%),
-        url("images/mars2.jpg");
-      background-size: 1750px;
-    }
-    .stub-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      padding: 10px 0;
-    }
-    .stub-rect {
-      width: 240px;
-      height: 310px;
-      background: rgba(200,200,200,0.08);
-      border-radius: 20px;
-      border-top: 4px solid rgba(221,221,221,0.3);
-      border-left: 4px solid rgba(221,221,221,0.3);
-      border-bottom: 4px solid rgba(137,137,137,0.3);
-      border-right: 4px solid rgba(137,137,137,0.3);
-    }
-    .stub-section-label {
-      font-family: Prototype, serif;
-      color: #8b6914;
-      font-size: 11px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin: 20px 0 10px;
-    }
-  </style>
 </head>
 
 <html>
   <body>
-    <div id="section-cards" class="site-section active">
     <div class="app-container">
       <div class="list-container">
         <div id="buttonsContainer">
@@ -96,11 +27,8 @@
             <div id="titleContainer">
               <div class="title-style">TERRAFORMING MARS CARDS LIST</div>
             </div>
-            <div id="site-nav">
-              <button class="nav-btn active" onclick="showSection('cards', this)">Cards</button>
-              <button class="nav-btn" onclick="showSection('awards', this)">Awards &amp; Milestones</button>
-              <button class="nav-btn" onclick="showSection('maps', this)">Maps</button>
-            </div>
+            <a href="map-tharsis.html" style="font-family:Prototype,serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#c8a848;background:rgba(0,0,0,0.5);border:2px solid #8b6914;border-radius:6px;padding:7px 18px;text-decoration:none;margin-left:20px;vertical-align:middle;">🗺 Maps</a>
+            
             <a
               disabled
               id="btn-selectedCards"
@@ -18318,43 +18246,3 @@
     <script src="js/myscripts.js"></script>
   
     </div><!-- end app-container -->
-    </div><!-- end section-cards -->
-
-    <div id="section-awards" class="site-section">
-      <div class="app-container">
-        <div class="list-container">
-          <div id="buttonsContainer-awards">
-            <div id="buttonsContainer-header">
-              <div id="titleContainer">
-                <div class="title-style">AWARDS &amp; MILESTONES</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="section-maps" class="site-section">
-      <div class="app-container">
-        <div class="list-container">
-          <div id="buttonsContainer-maps">
-            <div id="buttonsContainer-header">
-              <div id="titleContainer">
-                <div class="title-style">MAPS</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-    function showSection(id, btn) {
-      document.querySelectorAll('.site-section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('#site-nav .nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('section-' + id).classList.add('active');
-      btn.classList.add('active');
-    }
-    </script>
-
-</body>
