@@ -21,36 +21,13 @@
 <html>
   <body>
 <style>
-  #tab-bar {
-    width: 100%;
-    background: #1a0e00;
-    border-bottom: 2px solid #8b6914;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    gap: 4px;
-    position: relative;
-    z-index: 999;
-  }
-  #tab-bar a {
-    font-family: Prototype, serif;
-    font-size: 12px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: #a88848;
-    text-decoration: none;
-    padding: 10px 20px 8px;
-    border-bottom: 3px solid transparent;
-    display: inline-block;
-  }
-  #tab-bar a:hover { color: #e8c848; }
-  #tab-bar a.active { color: #e8c848; border-bottom-color: #c8a848; }
+  #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; padding:0 20px; gap:4px; }
+  #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
+  #tab-bar a:hover { color:#e8c848; }
+  #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
 </style>
-<div id="tab-bar">
-  <a href="index.html" class="active">Cards</a>
-  <a href="map-tharsis.html">Maps</a>
-</div>
-    <div class="app-container">
+<div id="tab-bar"><a href="index.html" class="active">Cards</a><a href="map-tharsis.html">Maps</a></div>
+<div class="app-container">
       <div class="list-container">
         <div id="buttonsContainer">
           <div id="buttonsContainer-header">
