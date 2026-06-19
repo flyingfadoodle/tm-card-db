@@ -2,410 +2,377 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Tharsis Map - TM Database</title>
+  <meta name="viewport" content="width=960" />
+  <title>Maps - TM Database</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #000; font-family: Tahoma, Verdana, sans-serif; }
 
-    body {
-      background: #000;
-      font-family: 'Prototype', serif;
-      min-height: 100vh;
+    /* Tab bar - do not change */
+    #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; padding:0 20px; gap:4px; }
+    #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
+    #tab-bar a:hover { color:#e8c848; }
+    #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
+
+    /* Map sub-nav */
+    #map-nav {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      gap: 0;
+      padding: 12px 20px 0;
+      border-bottom: 1px solid #333;
     }
-
-    h1 {
-      color: #c8a848;
-      font-size: 22px;
-      letter-spacing: .12em;
+    #map-nav button {
+      font-family: Tahoma, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    /* Back button */
-    .back-btn-unused {
-      display: inline-block;
-      font-family: 'Prototype', serif;
-      font-size: 13px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: #c8a848;
-      background: rgba(0,0,0,0.7);
-      border: 2px solid #8b6914;
-      border-radius: 6px;
-      padding: 8px 20px;
+      color: #888;
+      background: #111;
+      border: 1px solid #333;
+      border-bottom: none;
+      padding: 7px 20px;
       cursor: pointer;
-      text-decoration: none;
-      margin-bottom: 24px;
+      margin-right: 2px;
+      border-radius: 4px 4px 0 0;
     }
-    .back-btn:hover { background: rgba(139,105,20,0.3); }
+    #map-nav button.active { color: #e8c848; background: #1a1000; border-color: #8b6914; }
+    #map-nav button:hover:not(.active) { color: #ccc; }
 
-    /* Board container */
-    .board-wrap {
-      position: relative;
+    /* Board container - matches original exactly */
+    .board-section { display: none; padding: 20px; }
+    .board-section.active { display: flex; justify-content: center; }
+
+    .board-cont {
+      display: inline-block;
+      vertical-align: top;
       width: 670px;
-      height: 630px;
+      position: relative;
     }
 
-    .board-bg {
-      position: absolute;
-      top: 0; left: 30px;
-      width: 620px;
-      height: 560px;
-      background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars.png');
-      background-size: cover;
-      background-position: center;
-      border-radius: 8px;
-    }
+    /* Board background images */
+    .board-tharsis  { background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat; }
+    .board-hellas   { background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat; }
+    .board-elysium  { background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat; }
 
-    /* Hex spaces */
-    .board-spaces {
-      position: absolute;
-      top: 82px;
-      left: 123px;
+    /* The hex grid - exact match to original */
+    .board {
       width: 600px;
       height: 488px;
+      margin: 85px 0 0 93px;
+      position: relative;
     }
 
-    .hex {
-      position: absolute;
+    /* Each hex space - exact from board.less */
+    .board-space {
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
       width: 44px;
       height: 44px;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: default;
     }
 
-    .hex.ocean {
-      background: rgba(0, 100, 200, 0.55);
-      border: none;
-    }
-    .hex.land {
-      background: rgba(180, 80, 20, 0.15);
-    }
-    .hex.volcanic {
-      background: rgba(180, 80, 20, 0.15);
-      outline: none;
-    }
-    .hex.restricted {
-      background: rgba(0,0,0,0.4);
-    }
+    /* Space type colors */
+    .board-space--ocean   { background: rgba(10, 90, 200, 0.7); }
+    .board-space--land    { background: rgba(0,0,0,0); }
+    .board-space--volcanic { background: rgba(0,0,0,0); }
+    .board-space--restricted { background: rgba(0,0,0,0.5); }
 
-    /* Volcanic marker (bold border effect via box-shadow won't work with clip-path, use pseudo via wrapper) */
-    .hex-wrap {
-      position: absolute;
-    }
-    .hex-wrap.volcanic > .hex {
-      background: rgba(180, 80, 20, 0.2);
-    }
-    .hex-wrap.volcanic::after {
+    /* Volcanic border - using outline trick via box-shadow won't work with clip-path
+       Use a wrapper with a pseudo element instead */
+    .board-space-wrap { position: absolute; }
+    .board-space-wrap.volcanic::after {
       content: '';
       position: absolute;
-      inset: 0;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      border: 3px solid rgba(255,180,50,0.6);
+      inset: -3px;
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+      background: rgba(255,180,0,0.25);
       pointer-events: none;
+      z-index: 2;
     }
 
-    /* Bonus icons */
-    .bonuses {
+    /* Bonus icons - exact from board.less */
+    .board-space-bonus {
       position: absolute;
-      top: 0; left: 0;
-      width: 44px;
-      height: 44px;
       pointer-events: none;
-    }
-    .bonus {
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+      width: 16px;
+      height: 16px;
+      margin: 0 0 0 2px;
       border-radius: 2px;
+      background-size: 16px;
+      background-repeat: no-repeat;
     }
-    /* Bonus positions: 1 bonus centered, 2 bonuses side by side, 3 bonuses triangle */
-    .b1 { top: 15px; left: 15px; }
-    .b1-of-2 { top: 15px; left: 6px; }
-    .b2-of-2 { top: 15px; left: 24px; }
-    .b1-of-3 { top: 8px; left: 15px; }
-    .b2-of-3 { top: 22px; left: 6px; }
-    .b3-of-3 { top: 22px; left: 24px; }
+    .board-space-bonus-pos--only { margin: 14px 0 0 14px; }
+    .board-space-bonus-pos--1    { margin: 14px 0 0 5px; }
+    .board-space-bonus-pos--2    { margin: 14px 0 0 23px; }
+    .board-space-bonus-pos--3    { margin: 23px 0 0 14px; }
 
-    .bonus-plant { background-image: url('images/resources/plant.png'); }
-    .bonus-steel { background-image: url('images/resources/steel.png'); }
-    .bonus-titanium { background-image: url('images/resources/titanium.png'); }
-    .bonus-card { background-image: url('images/resources/card.png'); height: 18px; }
+    .board-space-bonus--plant    { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/plant.png'); }
+    .board-space-bonus--steel    { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/steel.png'); }
+    .board-space-bonus--titanium { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/titanium.png'); }
+    .board-space-bonus--card     { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/card.png'); height: 20px; }
+    .board-space-bonus--heat     { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/resources/heat.png'); }
+    .board-space-bonus--bonusocean {
+      background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/colony.png');
+      background-size: 32px 21px; width: 36px; height: 21px;
+    }
 
-    /* Space ID label (small) */
-    .space-id {
+    /* Hex positions - exact from board_items_positions.less */
+    .board-space-03 { margin: 34px 0 0 104px; }
+    .board-space-04 { margin: 34px 0 0 153px; }
+    .board-space-05 { margin: 34px 0 0 202px; }
+    .board-space-06 { margin: 34px 0 0 251px; }
+    .board-space-07 { margin: 34px 0 0 300px; }
+    .board-space-08 { margin: 75px 0 0 80px; }
+    .board-space-09 { margin: 75px 0 0 129px; }
+    .board-space-10 { margin: 75px 0 0 178px; }
+    .board-space-11 { margin: 75px 0 0 227px; }
+    .board-space-12 { margin: 75px 0 0 276px; }
+    .board-space-13 { margin: 75px 0 0 325px; }
+    .board-space-14 { margin: 116px 0 0 55px; }
+    .board-space-15 { margin: 116px 0 0 104px; }
+    .board-space-16 { margin: 116px 0 0 153px; }
+    .board-space-17 { margin: 116px 0 0 202px; }
+    .board-space-18 { margin: 116px 0 0 251px; }
+    .board-space-19 { margin: 116px 0 0 300px; }
+    .board-space-20 { margin: 116px 0 0 349px; }
+    .board-space-21 { margin: 157px 0 0 31px; }
+    .board-space-22 { margin: 157px 0 0 80px; }
+    .board-space-23 { margin: 157px 0 0 129px; }
+    .board-space-24 { margin: 157px 0 0 178px; }
+    .board-space-25 { margin: 157px 0 0 227px; }
+    .board-space-26 { margin: 157px 0 0 276px; }
+    .board-space-27 { margin: 157px 0 0 325px; }
+    .board-space-28 { margin: 157px 0 0 374px; }
+    .board-space-29 { margin: 198px 0 0 6px; }
+    .board-space-30 { margin: 198px 0 0 55px; }
+    .board-space-31 { margin: 198px 0 0 104px; }
+    .board-space-32 { margin: 198px 0 0 153px; }
+    .board-space-33 { margin: 198px 0 0 202px; }
+    .board-space-34 { margin: 198px 0 0 251px; }
+    .board-space-35 { margin: 198px 0 0 300px; }
+    .board-space-36 { margin: 198px 0 0 349px; }
+    .board-space-37 { margin: 198px 0 0 398px; }
+    .board-space-38 { margin: 239px 0 0 31px; }
+    .board-space-39 { margin: 239px 0 0 80px; }
+    .board-space-40 { margin: 239px 0 0 129px; }
+    .board-space-41 { margin: 239px 0 0 178px; }
+    .board-space-42 { margin: 239px 0 0 227px; }
+    .board-space-43 { margin: 239px 0 0 276px; }
+    .board-space-44 { margin: 239px 0 0 325px; }
+    .board-space-45 { margin: 239px 0 0 374px; }
+    .board-space-46 { margin: 280px 0 0 55px; }
+    .board-space-47 { margin: 280px 0 0 104px; }
+    .board-space-48 { margin: 280px 0 0 153px; }
+    .board-space-49 { margin: 280px 0 0 202px; }
+    .board-space-50 { margin: 280px 0 0 251px; }
+    .board-space-51 { margin: 280px 0 0 300px; }
+    .board-space-52 { margin: 280px 0 0 349px; }
+    .board-space-53 { margin: 321px 0 0 80px; }
+    .board-space-54 { margin: 321px 0 0 129px; }
+    .board-space-55 { margin: 321px 0 0 178px; }
+    .board-space-56 { margin: 321px 0 0 227px; }
+    .board-space-57 { margin: 321px 0 0 276px; }
+    .board-space-58 { margin: 321px 0 0 325px; }
+    .board-space-59 { margin: 362px 0 0 104px; }
+    .board-space-60 { margin: 362px 0 0 153px; }
+    .board-space-61 { margin: 362px 0 0 202px; }
+    .board-space-62 { margin: 362px 0 0 251px; }
+    .board-space-63 { margin: 362px 0 0 300px; }
+
+    /* SVG legend overlay */
+    .board-legend {
       position: absolute;
-      bottom: 2px;
-      right: 3px;
-      font-size: 7px;
-      color: rgba(255,255,255,0.5);
+      margin: -67px 0 0 -100px;
+      z-index: 5;
       pointer-events: none;
-      font-family: Arial, sans-serif;
     }
-
-    /* SVG labels overlay */
-    .board-labels {
-      position: absolute;
-      top: 82px;
-      left: 123px;
-      width: 600px;
-      height: 488px;
-      pointer-events: none;
-    }
-
-    /* Tracks */
-    .tracks {
-      position: absolute;
-      top: 82px;
-      left: 30px;
-      width: 88px;
-      height: 488px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .track {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .track-label {
-      color: #c8a848;
-      font-size: 8px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-    .track-val {
-      color: #888;
-      font-size: 9px;
-      line-height: 1.4;
-      text-align: center;
-    }
-    .track-val.active {
-      color: #fff;
+    .board-caption {
+      font-family: Tahoma, Verdana, sans-serif;
+      font-size: 10px;
       font-weight: bold;
+      fill: white;
+      pointer-events: none;
+    }
+    .board-line {
+      stroke: white;
+      stroke-width: 3;
+      stroke-opacity: 0.3;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-<style>
-  #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; align-items:center; padding:0 20px; gap:4px; }
-  #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
-  #tab-bar a:hover { color:#e8c848; }
-  #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
-</style>
+
 <div id="tab-bar">
-  <a href="index.html">Cards</a><a href="awards.html">Awards &amp; Milestones</a><a href="map-tharsis.html" class="active">Maps</a>
+  <a href="index.html">Cards</a>
+  <a href="awards.html">Awards &amp; Milestones</a>
+  <a href="map-tharsis.html" class="active">Maps</a>
 </div>
-<h1>Tharsis Republic — Map</h1>
 
-<div class="board-wrap">
+<div id="map-nav">
+  <button class="active" onclick="showMap('tharsis', this)">Tharsis</button>
+  <button onclick="showMap('hellas', this)">Hellas</button>
+  <button onclick="showMap('elysium', this)">Elysium</button>
+</div>
 
-  <!-- Mars terrain background -->
-  <div class="board-bg"></div>
+<!-- THARSIS -->
+<div id="map-tharsis" class="board-section active">
+  <div class="board-cont board-tharsis" id="board-tharsis-cont"></div>
+</div>
 
-  <!-- Hex spaces -->
-  <div class="board-spaces" id="board"></div>
+<!-- HELLAS -->
+<div id="map-hellas" class="board-section">
+  <div class="board-cont board-hellas" id="board-hellas-cont"></div>
+</div>
 
-  <!-- SVG labels -->
-  <svg class="board-labels" viewBox="0 0 600 488">
-    <!-- Ascraeus Mons -->
-    <g transform="translate(95, 192)">
-      <text font-family="Arial" font-size="9" font-weight="bold" fill="white" opacity="0.85">
-        <tspan dy="0">Ascraeus</tspan>
-        <tspan x="12" dy="11">Mons</tspan>
-      </text>
-      <line x1="38" y1="10" x2="88" y2="16" stroke="white" stroke-width="1.5" stroke-opacity="0.4"/>
-      <circle cx="88" cy="16" r="2" fill="white" opacity="0.6"/>
-    </g>
-    <!-- Pavonis Mons -->
-    <g transform="translate(90, 230)">
-      <text font-family="Arial" font-size="9" font-weight="bold" fill="white" opacity="0.85">
-        <tspan dy="0">Pavonis</tspan>
-        <tspan x="4" dy="11">Mons</tspan>
-      </text>
-      <line x1="35" y1="10" x2="72" y2="16" stroke="white" stroke-width="1.5" stroke-opacity="0.4"/>
-      <circle cx="72" cy="16" r="2" fill="white" opacity="0.6"/>
-    </g>
-    <!-- Arsia Mons -->
-    <g transform="translate(77, 275)">
-      <text font-family="Arial" font-size="9" font-weight="bold" fill="white" opacity="0.85">
-        <tspan dy="0">Arsia</tspan>
-        <tspan x="-2" dy="11">Mons</tspan>
-      </text>
-      <line x1="25" y1="10" x2="49" y2="16" stroke="white" stroke-width="1.5" stroke-opacity="0.4"/>
-      <circle cx="49" cy="16" r="2" fill="white" opacity="0.6"/>
-    </g>
-    <!-- Tharsis Tholus -->
-    <g transform="translate(85, 175)">
-      <text font-family="Arial" font-size="9" font-weight="bold" fill="white" opacity="0.85" x="47">
-        <tspan dy="0">Tharsis</tspan>
-        <tspan dy="11" x="48">Tholus</tspan>
-      </text>
-      <line y1="-3" x2="160" y2="2" stroke="white" stroke-width="1.5" stroke-opacity="0.4" x1="90"/>
-      <circle cx="160" cy="2" r="2" fill="white" opacity="0.6"/>
-    </g>
-    <!-- Noctis City -->
-    <g transform="translate(85, 320)">
-      <text font-family="Arial" font-size="9" font-weight="bold" fill="white" opacity="0.85">
-        <tspan dy="0">Noctis</tspan>
-        <tspan x="7" dy="11">City</tspan>
-      </text>
-      <line x1="30" y1="10" x2="140" y2="-30" stroke="white" stroke-width="1.5" stroke-opacity="0.4"/>
-      <circle cx="140" cy="-30" r="2" fill="white" opacity="0.6"/>
-    </g>
-  </svg>
-
+<!-- ELYSIUM -->
+<div id="map-elysium" class="board-section">
+  <div class="board-cont board-elysium" id="board-elysium-cont"></div>
 </div>
 
 <script>
-// Tharsis board data from TharsisBoard.ts
-// Format: [spaceId, type, bonuses[], volcanic]
-// Types: L=land, O=ocean, V=volcanic(land)
-// Bonuses: P=plant, S=steel, T=titanium, C=card
-// Space IDs 03-63 (01=Ganymede colony, 02=Phobos - skip)
+const P = 'plant', S = 'steel', T = 'titanium', C = 'card', H = 'heat', O = 'bonusocean';
 
-const S = 'steel', P = 'plant', C = 'card', T = 'titanium';
-
-const spaces = [
-  // y=0 (row 0, 5 tiles, ids 03-07)
-  {id:'03', type:'L', bonuses:[S,S]},
-  {id:'04', type:'O', bonuses:[S,S]},
-  {id:'05', type:'L', bonuses:[]},
-  {id:'06', type:'O', bonuses:[C]},
-  {id:'07', type:'O', bonuses:[]},
-  // y=1 (row 1, 6 tiles, ids 08-13)
-  {id:'08', type:'L', bonuses:[]},
-  {id:'09', type:'V', bonuses:[S]},
-  {id:'10', type:'L', bonuses:[]},
-  {id:'11', type:'L', bonuses:[]},
-  {id:'12', type:'L', bonuses:[]},
-  {id:'13', type:'O', bonuses:[C,C]},
-  // y=2 (row 2, 7 tiles, ids 14-20)
-  {id:'14', type:'V', bonuses:[C]},
-  {id:'15', type:'L', bonuses:[]},
-  {id:'16', type:'L', bonuses:[]},
-  {id:'17', type:'L', bonuses:[]},
-  {id:'18', type:'L', bonuses:[]},
-  {id:'19', type:'L', bonuses:[]},
-  {id:'20', type:'L', bonuses:[S]},
-  // y=3 (row 3, 8 tiles, ids 21-28)
-  {id:'21', type:'V', bonuses:[P,T]},
-  {id:'22', type:'L', bonuses:[P]},
-  {id:'23', type:'L', bonuses:[P]},
-  {id:'24', type:'L', bonuses:[P]},
-  {id:'25', type:'L', bonuses:[P,P]},
-  {id:'26', type:'L', bonuses:[P]},
-  {id:'27', type:'L', bonuses:[P]},
-  {id:'28', type:'O', bonuses:[P,P]},
-  // y=4 (row 4, 9 tiles, ids 29-37)
-  {id:'29', type:'V', bonuses:[P,P]},
-  {id:'30', type:'L', bonuses:[P,P]},
-  {id:'31', type:'L', bonuses:[P,P], noctis:true}, // Noctis City - doNotShuffle
-  {id:'32', type:'O', bonuses:[P,P]},
-  {id:'33', type:'O', bonuses:[P,P]},
-  {id:'34', type:'O', bonuses:[P,P]},
-  {id:'35', type:'L', bonuses:[P,P]},
-  {id:'36', type:'L', bonuses:[P,P]},
-  {id:'37', type:'L', bonuses:[P,P]},
-  // y=5 (row 5, 8 tiles, ids 38-45)
-  {id:'38', type:'L', bonuses:[P]},
-  {id:'39', type:'L', bonuses:[P,P]},
-  {id:'40', type:'L', bonuses:[P]},
-  {id:'41', type:'L', bonuses:[P]},
-  {id:'42', type:'L', bonuses:[P]},
-  {id:'43', type:'O', bonuses:[P]},
-  {id:'44', type:'O', bonuses:[P]},
-  {id:'45', type:'O', bonuses:[P]},
-  // y=6 (row 6, 7 tiles, ids 46-52)
-  {id:'46', type:'L', bonuses:[]},
-  {id:'47', type:'L', bonuses:[]},
-  {id:'48', type:'L', bonuses:[]},
-  {id:'49', type:'L', bonuses:[]},
-  {id:'50', type:'L', bonuses:[]},
-  {id:'51', type:'L', bonuses:[P]},
-  {id:'52', type:'L', bonuses:[]},
-  // y=7 (row 7, 6 tiles, ids 53-58)
-  {id:'53', type:'L', bonuses:[S,S]},
-  {id:'54', type:'L', bonuses:[]},
-  {id:'55', type:'L', bonuses:[C]},
-  {id:'56', type:'L', bonuses:[C]},
-  {id:'57', type:'L', bonuses:[]},
-  {id:'58', type:'L', bonuses:[T]},
-  // y=8 (row 8, 5 tiles, ids 59-63)
-  {id:'59', type:'L', bonuses:[S]},
-  {id:'60', type:'L', bonuses:[S,S]},
-  {id:'61', type:'L', bonuses:[]},
-  {id:'62', type:'L', bonuses:[]},
-  {id:'63', type:'O', bonuses:[T,T]},
+// Board data: [id, type, bonuses]
+// type: L=land, V=volcanic, O=ocean
+const THARSIS = [
+  // y=0
+  ['03','L',[S,S]], ['04','O',[S,S]], ['05','L',[]], ['06','O',[C]], ['07','O',[]],
+  // y=1
+  ['08','L',[]], ['09','V',[S]], ['10','L',[]], ['11','L',[]], ['12','L',[]], ['13','O',[C,C]],
+  // y=2
+  ['14','V',[C]], ['15','L',[]], ['16','L',[]], ['17','L',[]], ['18','L',[]], ['19','L',[]], ['20','L',[S]],
+  // y=3
+  ['21','V',[P,T]], ['22','L',[P]], ['23','L',[P]], ['24','L',[P]], ['25','L',[P,P]], ['26','L',[P]], ['27','L',[P]], ['28','O',[P,P]],
+  // y=4
+  ['29','V',[P,P]], ['30','L',[P,P]], ['31','L',[P,P]], ['32','O',[P,P]], ['33','O',[P,P]], ['34','O',[P,P]], ['35','L',[P,P]], ['36','L',[P,P]], ['37','L',[P,P]],
+  // y=5
+  ['38','L',[P]], ['39','L',[P,P]], ['40','L',[P]], ['41','L',[P]], ['42','L',[P]], ['43','O',[P]], ['44','O',[P]], ['45','O',[P]],
+  // y=6
+  ['46','L',[]], ['47','L',[]], ['48','L',[]], ['49','L',[]], ['50','L',[]], ['51','L',[P]], ['52','L',[]],
+  // y=7
+  ['53','L',[S,S]], ['54','L',[]], ['55','L',[C]], ['56','L',[C]], ['57','L',[]], ['58','L',[T]],
+  // y=8
+  ['59','L',[S]], ['60','L',[S,S]], ['61','L',[]], ['62','L',[]], ['63','O',[T,T]],
 ];
 
-// CSS margin positions from board_items_positions.less (top, left)
-const positions = {
-  '03':[34,104], '04':[34,153], '05':[34,202], '06':[34,251], '07':[34,300],
-  '08':[75,80],  '09':[75,129], '10':[75,178], '11':[75,227], '12':[75,276], '13':[75,325],
-  '14':[116,55], '15':[116,104],'16':[116,153],'17':[116,202],'18':[116,251],'19':[116,300],'20':[116,349],
-  '21':[157,31], '22':[157,80], '23':[157,129],'24':[157,178],'25':[157,227],'26':[157,276],'27':[157,325],'28':[157,374],
-  '29':[198,6],  '30':[198,55], '31':[198,104],'32':[198,153],'33':[198,202],'34':[198,251],'35':[198,300],'36':[198,349],'37':[198,398],
-  '38':[239,31], '39':[239,80], '40':[239,129],'41':[239,178],'42':[239,227],'43':[239,276],'44':[239,325],'45':[239,374],
-  '46':[280,55], '47':[280,104],'48':[280,153],'49':[280,202],'50':[280,251],'51':[280,300],'52':[280,349],
-  '53':[321,80], '54':[321,129],'55':[321,178],'56':[321,227],'57':[321,276],'58':[321,325],
-  '59':[362,104],'60':[362,153],'61':[362,202],'62':[362,251],'63':[362,300],
+const HELLAS = [
+  // y=0
+  ['03','O',[P,P]], ['04','L',[P,P]], ['05','L',[P,P]], ['06','L',[P,S]], ['07','L',[P]],
+  // y=1
+  ['08','O',[P,P]], ['09','L',[P,P]], ['10','L',[P]], ['11','L',[P,S]], ['12','L',[P]], ['13','L',[P]],
+  // y=2
+  ['14','O',[P]], ['15','L',[P]], ['16','L',[S]], ['17','L',[S]], ['18','L',[]], ['19','L',[P,P]], ['20','L',[P,C]],
+  // y=3
+  ['21','O',[P]], ['22','L',[P]], ['23','L',[S]], ['24','L',[S,S]], ['25','L',[S]], ['26','O',[P]], ['27','O',[P]], ['28','L',[P]],
+  // y=4
+  ['29','L',[C]], ['30','L',[]], ['31','L',[]], ['32','L',[S,S]], ['33','L',[]], ['34','O',[C]], ['35','O',[H,H,H]], ['36','O',[]], ['37','L',[P]],
+  // y=5
+  ['38','L',[T]], ['39','L',[]], ['40','L',[S]], ['41','L',[]], ['42','L',[]], ['43','O',[]], ['44','O',[S]], ['45','L',[]],
+  // y=6
+  ['46','O',[T,T]], ['47','L',[]], ['48','L',[]], ['49','L',[C]], ['50','L',[]], ['51','L',[]], ['52','L',[T]],
+  // y=7
+  ['53','L',[S]], ['54','L',[C]], ['55','L',[H,H]], ['56','L',[H,H]], ['57','L',[T]], ['58','L',[T]],
+  // y=8
+  ['59','L',[]], ['60','L',[H,H]], ['61','L',[O]], ['62','L',[H,H]], ['63','L',[]],
+];
+
+const ELYSIUM = [
+  // y=0
+  ['03','O',[]], ['04','O',[T]], ['05','O',[C]], ['06','O',[S]], ['07','L',[C]],
+  // y=1
+  ['08','V',[T]], ['09','L',[]], ['10','L',[]], ['11','O',[]], ['12','O',[]], ['13','L',[S,S]],
+  // y=2
+  ['14','V',[T,T]], ['15','L',[]], ['16','L',[C]], ['17','L',[]], ['18','O',[P]], ['19','O',[]], ['20','V',[C,C,C]],
+  // y=3
+  ['21','L',[P]], ['22','L',[P]], ['23','L',[P]], ['24','O',[P,P]], ['25','L',[P]], ['26','O',[P]], ['27','O',[P]], ['28','L',[P,S]],
+  // y=4
+  ['29','L',[P,P]], ['30','L',[P,P]], ['31','L',[P,P]], ['32','O',[P,P]], ['33','L',[P,P]], ['34','L',[P,P,P]], ['35','L',[P,P]], ['36','L',[P,P]], ['37','V',[P,T]],
+  // y=5
+  ['38','L',[S]], ['39','L',[P]], ['40','L',[P]], ['41','L',[P]], ['42','L',[P]], ['43','L',[P]], ['44','L',[P]], ['45','L',[]],
+  // y=6
+  ['46','L',[T]], ['47','L',[S]], ['48','L',[]], ['49','L',[]], ['50','L',[S]], ['51','L',[]], ['52','L',[]],
+  // y=7
+  ['53','L',[S,S]], ['54','L',[]], ['55','L',[]], ['56','L',[]], ['57','L',[S,S]], ['58','L',[]],
+  // y=8
+  ['59','L',[S]], ['60','L',[]], ['61','L',[C]], ['62','L',[C]], ['63','L',[S,S]],
+];
+
+const LEGENDS = {
+  tharsis: `<g transform="translate(95,192)"><text class="board-caption"><tspan dy="15">Ascraeus</tspan><tspan x="12" dy="12">Mons</tspan></text><line x1="38" y1="20" x2="88" y2="26" class="board-line"/><text x="86" y="29" class="board-caption" fill="white">●</text></g>
+<g transform="translate(90,230)"><text class="board-caption"><tspan dy="15">Pavonis</tspan><tspan x="4" dy="12">Mons</tspan></text><line x1="35" y1="25" x2="72" y2="30" class="board-line"/><text x="66" y="33" class="board-caption" fill="white">●</text></g>
+<g transform="translate(77,275)"><text class="board-caption"><tspan dy="15">Arsia</tspan><tspan x="-2" dy="12">Mons</tspan></text><line x1="25" y1="20" x2="49" y2="26" class="board-line"/><text x="47" y="29" class="board-caption" fill="white">●</text></g>
+<g transform="translate(85,175)"><text class="board-caption" dx="47"><tspan dy="-7">Tharsis</tspan><tspan dy="12" x="48">Tholus</tspan></text><line y1="-3" x2="160" y2="2" class="board-line" x1="90"/><text x="158" y="5" class="board-caption" fill="white">●</text></g>
+<g transform="translate(85,320)"><text class="board-caption"><tspan dy="15">Noctis</tspan><tspan x="7" dy="12">City</tspan></text><line x1="30" y1="20" x2="140" y2="-20" class="board-line"/><text x="136" y="-18" class="board-caption" fill="white">●</text></g>`,
+
+  hellas: `<g transform="translate(230,420)"><text class="board-caption"><tspan dy="15">Hellas</tspan><tspan x="2" dy="12">Sea</tspan></text><line x1="30" y1="10" x2="55" y2="-30" class="board-line"/><text x="53" y="-27" class="board-caption" fill="white">●</text></g>`,
+
+  elysium: `<g transform="translate(110,190)"><text class="board-caption"><tspan dy="15">Elysium</tspan><tspan x="8" dy="12">Mons</tspan></text></g>
+<g transform="translate(130,150)"><text class="board-caption"><tspan dy="15">Hecatus</tspan><tspan x="3" dy="12">Tholus</tspan></text></g>
+<g transform="translate(545,272)"><text class="board-caption"><tspan dy="15">Arsia</tspan><tspan x="0" dy="12">Mons</tspan></text></g>
+<g transform="translate(505,190)"><text class="board-caption"><tspan x="-5" dy="15">Olympus</tspan><tspan x="4" dy="12">Mons</tspan></text></g>`,
 };
 
-const bonusClass = { steel:'bonus-steel', plant:'bonus-plant', titanium:'bonus-titanium', card:'bonus-card' };
-
-function bonusPositionClass(idx, total) {
-  if (total === 1) return 'b1';
-  if (total === 2) return idx === 0 ? 'b1-of-2' : 'b2-of-2';
-  if (idx === 0) return 'b1-of-3';
-  if (idx === 1) return 'b2-of-3';
-  return 'b3-of-3';
+function bonusClass(b) {
+  const map = {plant:'plant', steel:'steel', titanium:'titanium', card:'card', heat:'heat', bonusocean:'bonusocean'};
+  return 'board-space-bonus board-space-bonus--' + map[b];
 }
 
-const board = document.getElementById('board');
+function bonusPos(i, total) {
+  if (total === 1) return ' board-space-bonus-pos--only';
+  if (i === 0) return ' board-space-bonus-pos--1';
+  if (i === 1) return ' board-space-bonus-pos--2';
+  return ' board-space-bonus-pos--3';
+}
 
-spaces.forEach(sp => {
-  const pos = positions[sp.id];
-  if (!pos) return;
+function buildBoard(containerId, spaces, legendKey) {
+  const cont = document.getElementById(containerId);
+  
+  // Build inner board div
+  const board = document.createElement('div');
+  board.className = 'board';
 
-  const wrap = document.createElement('div');
-  wrap.className = 'hex-wrap' + (sp.type === 'V' ? ' volcanic' : '');
-  wrap.style.top = pos[0] + 'px';
-  wrap.style.left = pos[1] + 'px';
-  wrap.style.position = 'absolute';
+  spaces.forEach(([id, type, bonuses]) => {
+    const wrap = document.createElement('div');
+    wrap.className = `board-space-wrap${type === 'V' ? ' volcanic' : ''}`;
 
-  const hex = document.createElement('div');
-  hex.className = 'hex ' + (sp.type === 'O' ? 'ocean' : sp.type === 'V' ? 'volcanic' : 'land');
-  hex.title = '#' + sp.id;
+    const space = document.createElement('div');
+    space.className = `board-space board-space-${id} board-space--${type === 'O' ? 'ocean' : type === 'V' ? 'volcanic' : 'land'}`;
 
-  // Bonuses
-  if (sp.bonuses.length > 0) {
-    const bonusWrap = document.createElement('div');
-    bonusWrap.className = 'bonuses';
-    sp.bonuses.forEach((b, i) => {
-      const div = document.createElement('div');
-      div.className = 'bonus ' + bonusClass[b] + ' ' + bonusPositionClass(i, sp.bonuses.length);
-      bonusWrap.appendChild(div);
+    bonuses.forEach((b, i) => {
+      const icon = document.createElement('div');
+      icon.className = bonusClass(b) + bonusPos(i, bonuses.length);
+      space.appendChild(icon);
     });
-    hex.appendChild(bonusWrap);
-  }
 
-  wrap.appendChild(hex);
-  board.appendChild(wrap);
-});
+    wrap.appendChild(space);
+    board.appendChild(wrap);
+  });
+
+  // SVG legend
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('height', '550');
+  svg.setAttribute('width', '630');
+  svg.setAttribute('class', 'board-legend');
+  svg.innerHTML = LEGENDS[legendKey] || '';
+
+  board.appendChild(svg);
+  cont.appendChild(board);
+}
+
+buildBoard('board-tharsis-cont', THARSIS, 'tharsis');
+buildBoard('board-hellas-cont', HELLAS, 'hellas');
+buildBoard('board-elysium-cont', ELYSIUM, 'elysium');
+
+function showMap(name, btn) {
+  document.querySelectorAll('.board-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#map-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('map-' + name).classList.add('active');
+  btn.classList.add('active');
+}
 </script>
 </body>
 </html>
