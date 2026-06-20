@@ -239,9 +239,6 @@
     .rand-slot {
       width: 140px;
       height: 120px;
-      border-radius: 10px;
-      border: 2px dashed #333;
-      background: #111;
       position: relative;
       perspective: 600px;
     }
@@ -286,7 +283,10 @@
     }
 
     .flip-front {
-      background: #1a1a1a;
+      background: #e8e4d8;
+      border: 2px solid #aaa;
+      border-radius: 10px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
@@ -300,13 +300,10 @@
       color: #fff;
     }
     .flip-front img {
-      width: 280px;
-      height: 166px;
-      transform: scale(0.5);
-      transform-origin: top left;
-      position: absolute;
-      top: 28px;
-      left: 0;
+      width: 140px;
+      height: 83px;
+      object-fit: contain;
+      flex: 1;
     }
     .flip-front .rand-desc {
       position: absolute;
