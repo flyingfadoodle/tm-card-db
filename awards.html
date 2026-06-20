@@ -79,19 +79,16 @@
 
     /* Icon area - contains both the image and name bar at bottom */
     .ma-icon {
-      height: 110px;
+      height: 130px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       background: #d8d8d8;
-      position: relative;
     }
     .ma-icon img {
-      max-width: 100px;
-      max-height: 72px;
-      object-fit: contain;
-      margin-bottom: 2px;
+      width: 148px;
+      height: 128px;
+      object-fit: cover;
     }
 
     /* Name bar INSIDE the tile at the bottom of icon area */
@@ -288,11 +285,7 @@ function buildTile(item, type) {
   iconDiv.appendChild(img);
   tile.appendChild(iconDiv);
 
-  // Name bar inside icon area
-  const nameDiv = document.createElement('div');
-  nameDiv.className = `ma-name ${type}`;
-  nameDiv.textContent = item.name;
-  iconDiv.appendChild(nameDiv);
+
 
   // Tooltip
   const tooltip = document.createElement('div');
