@@ -2,38 +2,198 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=930" />
+  <meta name="viewport" content="width=960" />
   <title>Awards & Milestones - TM Database</title>
-  <link rel="stylesheet" type="text/css" href="css/mystyles.css" />
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #000; font-family: Prototype, Tahoma, serif; color: #ddd; }
+
     #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; padding:0 20px; gap:4px; }
     #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
     #tab-bar a:hover { color:#e8c848; }
     #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
+
+    .page { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+
+    h2 {
+      font-family: Prototype, serif;
+      font-size: 18px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #c8a848;
+      border-bottom: 1px solid #8b6914;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section { margin-bottom: 40px; }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .card {
+      width: 160px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #333;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color .15s, transform .15s;
+    }
+    .card:hover {
+      border-color: #8b6914;
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      width: 160px;
+      height: 160px;
+      background-repeat: no-repeat;
+      background-size: 160px auto;
+      background-image: url('https://raw.githubusercontent.com/ssimeonoff/ssimeonoff.github.io/master/images/ma-randomizer/column_m.png');
+    }
+    .card-icon.award {
+      background-image: url('https://raw.githubusercontent.com/ssimeonoff/ssimeonoff.github.io/master/images/ma-randomizer/column_a.png');
+    }
+
+    .card-name {
+      font-family: Prototype, serif;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 8px 6px;
+      color: #e8c848;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .card-desc {
+      font-family: Tahoma, sans-serif;
+      font-size: 10px;
+      line-height: 1.4;
+      padding: 8px;
+      color: #aaa;
+      border-top: 1px solid #222;
+    }
+
+    /* Tooltip on hover */
+    .card { position: relative; }
+    .card-tooltip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1000;
+      border: 1px solid #8b6914;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #ddd;
+      width: 220px;
+      z-index: 100;
+      pointer-events: none;
+    }
+    .card:hover .card-tooltip { display: block; }
   </style>
 </head>
+<body>
 
-<html>
-  <body>
-<style>
-  #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; padding:0 20px; gap:4px; }
-  #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
-  #tab-bar a:hover { color:#e8c848; }
-  #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
-</style>
-<div id="tab-bar"><a href="index.html">Cards</a><a href="awards.html" class="active">Awards &amp; Milestones</a><a href="map-tharsis.html">Maps</a></div>
+<div id="tab-bar">
+  <a href="index.html">Cards</a>
+  <a href="awards.html" class="active">Awards &amp; Milestones</a>
+  <a href="map-tharsis.html">Maps</a>
+</div>
 
-    <div class="app-container">
-      <div class="list-container">
-        <div id="buttonsContainer">
-          <div id="buttonsContainer-header">
-            <div id="titleContainer">
-              <div class="title-style">AWARDS &amp; MILESTONES</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="page">
 
-  </body>
+  <div class="section">
+    <h2>Milestones</h2>
+    <div class="grid" id="milestones-grid"></div>
+  </div>
+
+  <div class="section">
+    <h2>Awards</h2>
+    <div class="grid" id="awards-grid"></div>
+  </div>
+
+</div>
+
+<script>
+// Each sprite icon is 100px tall in the original, scaled to 160px here
+// So each icon = 160px * (100/100) = 160px in our scaled version
+// background-size: 160px auto, background-position-y: -(index * 160)px
+
+const MILESTONES = [
+  {name: 'Terraformer',     desc: '29 TR.'},
+  {name: 'Mayor',           desc: '3 cities.'},
+  {name: 'Gardener',        desc: '3 greeneries.'},
+  {name: 'Builder',         desc: '7 building tags.'},
+  {name: 'Planner',         desc: '16 cards in hand.'},
+  {name: 'Generalist',      desc: '1 production of each resource.'},
+  {name: 'Specialist',      desc: '10 production of 1 resource.'},
+  {name: 'Ecologist',       desc: '4 bio tags (plant, microbe, animal).'},
+  {name: 'Tycoon',          desc: '15 project cards played.'},
+  {name: 'Legend',          desc: '4 event cards.'},
+  {name: 'Diversifier',     desc: '8 different tags.'},
+  {name: 'Tactician',       desc: '4 cards with requirements.'},
+  {name: 'Polar Explorer',  desc: '3 tiles in the bottom 2 rows.'},
+  {name: 'Energizer',       desc: '6 energy production.'},
+  {name: 'Rim Settler',     desc: '3 Jovian tags.'},
+  {name: 'Hoverlord',       desc: '7 floater resources.'},
+];
+
+const AWARDS = [
+  {name: 'Landlord',        desc: 'Most tiles.'},
+  {name: 'Scientist',       desc: 'Most science tags.'},
+  {name: 'Banker',          desc: 'Highest M€ production.'},
+  {name: 'Thermalist',      desc: 'Most heat resources.'},
+  {name: 'Miner',           desc: 'Most steel and titanium resources combined.'},
+  {name: 'Celebrity',       desc: 'Most cards costing 20 M€ or more.'},
+  {name: 'Industrialist',   desc: 'Most steel and energy resources combined.'},
+  {name: 'Desert Settler',  desc: 'Most tiles in the bottom 2 rows.'},
+  {name: 'Estate Dealer',   desc: 'Most tiles next to ocean.'},
+  {name: 'Benefactor',      desc: 'Highest TR. Count before all other A&M!'},
+  {name: 'Cultivator',      desc: 'Most greeneries.'},
+  {name: 'Magnate',         desc: 'Most green (automated) cards.'},
+  {name: 'Space Baron',     desc: 'Most space tags.'},
+  {name: 'Excentric',       desc: 'Most resources on cards.'},
+  {name: 'Contractor',      desc: 'Most building tags.'},
+  {name: 'Venuphile',       desc: 'Most Venus tags.'},
+];
+
+function buildGrid(items, containerId, isAward) {
+  const grid = document.getElementById(containerId);
+  items.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const icon = document.createElement('div');
+    icon.className = 'card-icon' + (isAward ? ' award' : '');
+    icon.style.backgroundPositionY = -(i * 160) + 'px';
+
+    const name = document.createElement('div');
+    name.className = 'card-name';
+    name.textContent = item.name;
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'card-tooltip';
+    tooltip.textContent = item.desc;
+
+    card.appendChild(icon);
+    card.appendChild(name);
+    card.appendChild(tooltip);
+    grid.appendChild(card);
+  });
+}
+
+buildGrid(MILESTONES, 'milestones-grid', false);
+buildGrid(AWARDS, 'awards-grid', true);
+</script>
+</body>
 </html>
