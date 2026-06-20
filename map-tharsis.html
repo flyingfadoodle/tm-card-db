@@ -177,6 +177,7 @@
     .global-numbers {
       font-family: Prototype, sans-serif;
       font-size: 14px;
+      position: relative;
       margin: 11px 0 0 16px;
       height: 0;
       pointer-events: none;
@@ -479,8 +480,6 @@ function buildBoard(contId, spaces, outerSpaces, legendKey) {
   svg.innerHTML = LEGENDS[legendKey] || '';
   board.appendChild(svg);
 
-  cont.appendChild(board);
-
   // Global parameter tracks
   const gn = document.createElement('div');
   gn.className = 'global-numbers';
@@ -526,6 +525,7 @@ function buildBoard(contId, spaces, outerSpaces, legendKey) {
   gn.appendChild(oceansDiv);
 
   cont.appendChild(gn);
+  cont.appendChild(board);
 
   // Parameter icons
   ['param-temp-icon','param-oxy-icon','param-venus-icon'].forEach(cls => {
