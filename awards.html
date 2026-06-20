@@ -40,11 +40,13 @@
       border-radius: 10px;
       overflow: hidden;
       border: 2px solid #aaa;
-      background: #e8e8e8;
+      background: #1a1a1a;
       box-shadow: 0 2px 6px rgba(0,0,0,0.5);
       cursor: default;
       position: relative;
       transition: transform .15s, box-shadow .15s;
+      display: flex;
+      flex-direction: column;
     }
     .ma-tile:hover {
       transform: translateY(-3px);
@@ -100,11 +102,15 @@
     .ma-desc {
       font-family: Tahoma, sans-serif;
       font-size: 10px;
-      line-height: 1.4;
-      color: #bbb;
-      padding: 6px 8px;
+      line-height: 1.35;
+      color: #aaa;
+      padding: 5px 8px;
       text-align: center;
       background: #1a1a1a;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Tooltip */
