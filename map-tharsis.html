@@ -288,10 +288,11 @@
     /* Parameter icons on board edge */
     .global-param-icon {
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       background-size: contain;
       background-repeat: no-repeat;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.8));
     }
     .param-temp-icon  { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/global-parameters/temperature.png'); position:absolute; top:590px; left:430px; }
     .param-oxy-icon   { background-image: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/global-parameters/oxygen.png'); position:absolute; top:590px; left:115px; }
@@ -527,7 +528,12 @@ function buildBoard(contId, spaces, outerSpaces, legendKey) {
   cont.appendChild(gn);
   cont.appendChild(board);
 
-  // Parameter icons are baked into the board background image
+  // Parameter icons
+  ['param-temp-icon','param-oxy-icon','param-venus-icon'].forEach(cls => {
+    const icon = document.createElement('div');
+    icon.className = `global-param-icon ${cls}`;
+    cont.appendChild(icon);
+  });
 }
 
 buildBoard('board-tharsis-cont', THARSIS, OUTER.tharsis, 'tharsis');
