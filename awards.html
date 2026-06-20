@@ -492,5 +492,85 @@ const ag = document.getElementById('awards-grid');
 MILESTONES.forEach(m => mg.appendChild(buildTile(m, 'milestone')));
 AWARDS.forEach(a => ag.appendChild(buildTile(a, 'award')));
 </script>
+
+<script>
+const BASE2 = 'https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/ma/';
+
+const ALL_M = [
+  {name:'Briber',icon:'briber'},{name:'Builder',icon:'builder7'},{name:'Coastguard',icon:'coastguard'},
+  {name:'Diversifier',icon:'diversifier'},{name:'Ecologist',icon:'ecologist'},{name:'Energizer',icon:'energizer'},
+  {name:'Engineer',icon:'engineer'},{name:'Farmer',icon:'farmer'},{name:'Forester',icon:'forester'},
+  {name:'Fundraiser',icon:'fundraiser'},{name:'Gardener',icon:'gardener'},{name:'Generalist',icon:'generalist'},
+  {name:'Geologist',icon:'geologist'},{name:'Hydrologist',icon:'hydrologist'},{name:'Landshaper',icon:'landshaper'},
+  {name:'Legend',icon:'legend4'},{name:'Lobbyist',icon:'lobbyist'},{name:'Mayor',icon:'mayor'},
+  {name:'Merchant',icon:'merchant'},{name:'Metallurgist',icon:'metallurgist'},{name:'Philantropist',icon:'philantropist'},
+  {name:'Pioneer',icon:'pioneer4'},{name:'Planetologist',icon:'planetologist'},{name:'Planner',icon:'planner'},
+  {name:'Producer',icon:'producer'},{name:'Researcher',icon:'researcher'},{name:'Rim Settler',icon:'rim-settler'},
+  {name:'Spacefarer',icon:'spacefarer4'},{name:'Sponsor',icon:'sponsor'},{name:'Tactician',icon:'tactician4'},
+  {name:'Terraformer',icon:'terraformer29'},{name:'Terran',icon:'terran5'},{name:'Thawer',icon:'thawer'},
+  {name:'Trader',icon:'trader'},
+];
+
+const ALL_A = [
+  {name:'Administrator',icon:'administrator'},{name:'Banker',icon:'banker'},{name:'Benefactor',icon:'benefactor'},
+  {name:'Biologist',icon:'biologist'},{name:'Botanist',icon:'botanist'},{name:'Celebrity',icon:'celebrity'},
+  {name:'Collector',icon:'collector'},{name:'Constructor',icon:'constructor'},{name:'Contractor',icon:'contractor'},
+  {name:'Cultivator',icon:'cultivator'},{name:'Electrician',icon:'electrician'},{name:'Estate Dealer',icon:'estate-dealer'},
+  {name:'Excentric',icon:'excentric'},{name:'Forecaster',icon:'forecaster'},{name:'Founder',icon:'founder'},
+  {name:'Highlander',icon:'highlander'},{name:'Incorporator',icon:'incorporator'},{name:'Industrialist',icon:'industrialist'},
+  {name:'Investor',icon:'investor'},{name:'Landlord',icon:'landlord'},{name:'Landscaper',icon:'landscaper'},
+  {name:'Magnate',icon:'magnate'},{name:'Manufacturer',icon:'manufacturer'},{name:'Metropolist',icon:'metropolist'},
+  {name:'Miner',icon:'miner'},{name:'Mogul',icon:'mogul'},{name:'Politician',icon:'t-politician'},
+  {name:'Promoter',icon:'promoter'},{name:'Scientist',icon:'scientist'},{name:'Space Baron',icon:'space-baron'},
+  {name:'Suburbian',icon:'suburbian'},{name:'Thermalist',icon:'thermalist'},{name:'Traveller',icon:'traveller'},
+  {name:'Visionary',icon:'visionary'},{name:'Zoologist',icon:'zoologist'},
+];
+
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function makeRandCard(item, type) {
+  const slot = document.createElement('div');
+  slot.className = 'rand-slot';
+  const flip = document.createElement('div');
+  flip.className = 'flip-card';
+  const back = document.createElement('div');
+  back.className = 'flip-back';
+  const front = document.createElement('div');
+  front.className = 'flip-front';
+  const header = document.createElement('div');
+  header.className = 'rand-header';
+  header.style.background = type==='milestone'
+    ? 'linear-gradient(180deg,#c8a840,#a07820)'
+    : 'linear-gradient(180deg,#d4b840,#b09020)';
+  const img = document.createElement('img');
+  img.src = BASE2 + item.icon + '.png';
+  img.alt = item.name;
+  const label = document.createElement('div');
+  label.className = 'rand-name';
+  label.textContent = item.name;
+  front.appendChild(header);
+  front.appendChild(img);
+  front.appendChild(label);
+  flip.appendChild(back);
+  flip.appendChild(front);
+  slot.appendChild(flip);
+  return slot;
+}
+
+function randomize() {
+  const ms = shuffle(ALL_M).slice(0,5);
+  const aw = shuffle(ALL_A).slice(0,5);
+  const mc = document.getElementById('milestone-slots');
+  const ac = document.getElementById('award-slots');
+  mc.innerHTML=''; ac.innerHTML='';
+  ms.forEach((m,i)=>{const card=makeRandCard(m,'milestone');mc.appendChild(card);setTimeout(()=>card.classList.add('revealed'),150+i*180);});
+  aw.forEach((a,i)=>{const card=makeRandCard(a,'award');ac.appendChild(card);setTimeout(()=>card.classList.add('revealed'),150+i*180);});
+}
+
+function resetRand() {
+  document.getElementById('milestone-slots').innerHTML='<div class="rand-slot"></div>'.repeat(5);
+  document.getElementById('award-slots').innerHTML='<div class="rand-slot"></div>'.repeat(5);
+}
+</script>
 </body>
 </html>
