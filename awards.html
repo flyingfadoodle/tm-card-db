@@ -87,13 +87,17 @@
       justify-content: center;
       background: #d8d8d8;
       position: relative;
+      overflow: hidden;
     }
     .ma-icon img {
-      width: 140px;
-      height: 83px;
+      width: 280px;
+      height: 166px;
       object-fit: contain;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
+      transform: scale(0.5);
+      transform-origin: top left;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     /* Name bar INSIDE the tile at the bottom of icon area */
