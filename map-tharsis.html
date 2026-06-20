@@ -311,6 +311,8 @@
   <button class="active" onclick="showMap('tharsis', this)">Tharsis</button>
   <button onclick="showMap('hellas', this)">Hellas</button>
   <button onclick="showMap('elysium', this)">Elysium</button>
+  <button onclick="showMap('vastitas', this)">Vastitas Borealis Nova</button>
+  <button onclick="showMap('utopia', this)">Utopia Planitia</button>
 </div>
 
 <div id="map-tharsis" class="board-section active">
@@ -318,6 +320,12 @@
 </div>
 <div id="map-hellas" class="board-section">
   <div class="board-cont board-without-venus" id="board-hellas-cont"></div>
+</div>
+<div id="map-vastitas" class="board-section">
+  <div class="board-cont board-without-venus" id="board-vastitas-cont"></div>
+</div>
+<div id="map-utopia" class="board-section">
+  <div class="board-cont board-without-venus" id="board-utopia-cont"></div>
 </div>
 <div id="map-elysium" class="board-section">
   <div class="board-cont board-without-venus" id="board-elysium-cont"></div>
@@ -362,6 +370,9 @@ const ELYSIUM = [
   ['59','L',[S]],['60','L',[]],['61','L',[C]],['62','L',[C]],['63','L',[S,S]],
 ];
 
+const VASTITAS = [["03", "L", ["plant"]], ["04", "L", []], ["05", "V", ["steel"]], ["06", "L", []], ["07", "L", []], ["08", "L", ["plant", "plant"]], ["09", "L", ["plant", "plant"]], ["10", "L", []], ["11", "L", []], ["12", "L", ["plant"]], ["13", "V", ["card"]], ["14", "L", ["card"]], ["15", "O", ["plant", "plant"]], ["16", "O", ["plant", "plant"]], ["17", "L", ["plant", "plant"]], ["18", "L", ["plant"]], ["19", "L", []], ["20", "L", []], ["21", "V", ["steel", "steel"]], ["22", "L", ["titanium"]], ["23", "O", ["plant", "plant"]], ["24", "L", ["plant"]], ["25", "L", []], ["26", "L", ["card"]], ["27", "L", ["plant"]], ["28", "L", ["delegate"]], ["29", "L", []], ["30", "L", []], ["31", "O", ["plant"]], ["32", "L", ["plant", "plant"]], ["33", "L", ["bonustemperature4mc"]], ["34", "O", ["plant", "plant"]], ["35", "O", ["plant", "plant"]], ["36", "O", ["plant", "plant"]], ["37", "L", ["card", "card"]], ["38", "L", ["card", "card"]], ["39", "L", []], ["40", "L", ["plant"]], ["41", "O", ["heat", "heat"]], ["42", "O", ["heat", "heat", "plant"]], ["43", "O", ["card"]], ["44", "L", ["plant"]], ["45", "L", ["titanium", "titanium"]], ["46", "V", ["titanium"]], ["47", "L", ["steel"]], ["48", "O", []], ["49", "O", ["heat", "heat"]], ["50", "L", ["plant", "plant"]], ["51", "L", ["plant"]], ["52", "L", []], ["53", "L", ["plant"]], ["54", "L", []], ["55", "L", ["plant"]], ["56", "L", ["plant", "steel"]], ["57", "L", ["steel"]], ["58", "L", ["plant"]], ["59", "L", ["delegate"]], ["60", "L", []], ["61", "L", ["card"]], ["62", "L", ["steel"]], ["63", "L", ["titanium"]]];
+const UTOPIA = [["03", "L", []], ["04", "L", []], ["05", "L", ["energy", "energy"]], ["06", "L", []], ["07", "L", []], ["08", "L", []], ["09", "L", ["steel", "steel"]], ["10", "L", ["energy", "energy"]], ["11", "L", ["energy", "energy", "card"]], ["12", "L", []], ["13", "L", []], ["14", "O", ["plant", "plant", "plant"]], ["15", "L", []], ["16", "L", ["steel"]], ["17", "L", []], ["18", "L", []], ["19", "L", ["card", "card", "titanium"]], ["20", "L", ["titanium", "titanium"]], ["21", "O", ["plant", "card"]], ["22", "L", ["plant"]], ["23", "L", ["plant"]], ["24", "L", ["plant", "plant"]], ["25", "O", ["plant", "plant"]], ["26", "O", ["plant"]], ["27", "O", ["plant"]], ["28", "L", ["plant"]], ["29", "L", []], ["30", "L", []], ["31", "L", []], ["32", "L", ["plant"]], ["33", "L", ["plant"]], ["34", "L", ["plant", "plant"]], ["35", "L", []], ["36", "O", []], ["37", "L", ["plant", "titanium"]], ["38", "L", ["steel"]], ["39", "L", ["steel", "steel"]], ["40", "O", ["plant", "plant"]], ["41", "L", ["plant", "plant"]], ["42", "L", []], ["43", "L", []], ["44", "L", ["steel", "steel"]], ["45", "L", []], ["46", "L", ["steel"]], ["47", "L", []], ["48", "O", []], ["49", "O", ["plant", "plant"]], ["50", "L", []], ["51", "L", []], ["52", "L", []], ["53", "L", []], ["54", "L", ["card", "card"]], ["55", "O", []], ["56", "O", ["plant", "plant"]], ["57", "L", ["steel", "titanium"]], ["58", "L", ["plant", "plant"]], ["59", "L", []], ["60", "L", []], ["61", "L", ["steel", "steel"]], ["62", "O", ["plant"]], ["63", "L", ["plant"]]];
+
 const OUTER = {
   tharsis: [
     {id:'01', label:'Ganymede\nColony'},
@@ -372,6 +383,14 @@ const OUTER = {
     {id:'02', label:'Phobos\nSpace Haven'},
   ],
   elysium: [
+    {id:'01', label:'Ganymede\nColony'},
+    {id:'02', label:'Phobos\nSpace Haven'},
+  ],
+  vastitas: [
+    {id:'01', label:'Ganymede\nColony'},
+    {id:'02', label:'Phobos\nSpace Haven'},
+  ],
+  utopia: [
     {id:'01', label:'Ganymede\nColony'},
     {id:'02', label:'Phobos\nSpace Haven'},
   ],
@@ -410,6 +429,8 @@ const LEGENDS = {
       <line x1="35" y1="-2" x2="55" y2="-50" class="board-line"/>
       <text x="52" y="-48" class="board-caption">●</text>
     </g>`,
+  vastitas: ``,
+  utopia: ``,
   elysium: `
     <g transform="translate(110,190)">
       <text class="board-caption"><tspan dy="15">Elysium</tspan><tspan x="8" dy="12">Mons</tspan></text>
@@ -539,6 +560,8 @@ function buildBoard(contId, spaces, outerSpaces, legendKey) {
 buildBoard('board-tharsis-cont', THARSIS, OUTER.tharsis, 'tharsis');
 buildBoard('board-hellas-cont',  HELLAS,  OUTER.hellas,  'hellas');
 buildBoard('board-elysium-cont', ELYSIUM, OUTER.elysium, 'elysium');
+buildBoard('board-vastitas-cont', VASTITAS, OUTER.vastitas, 'vastitas');
+buildBoard('board-utopia-cont', UTOPIA, OUTER.utopia, 'utopia');
 
 function showMap(name, btn) {
   document.querySelectorAll('.board-section').forEach(s => s.classList.remove('active'));
