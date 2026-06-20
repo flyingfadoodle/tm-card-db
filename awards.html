@@ -308,7 +308,11 @@ function buildTile(item, type) {
   nameDiv.textContent = item.name;
   iconDiv.appendChild(nameDiv);
 
-
+  // Description
+  const descDiv = document.createElement('div');
+  descDiv.className = 'ma-desc';
+  descDiv.textContent = item.desc;
+  tile.appendChild(descDiv);
 
   // Tooltip
   const tooltip = document.createElement('div');
