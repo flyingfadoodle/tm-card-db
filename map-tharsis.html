@@ -32,7 +32,7 @@
     }
 
     .board-cont.board-without-venus {
-      background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars-without-venus.png') no-repeat;
+      background: url('https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/board/mars.png') no-repeat;
     }
 
     /* Hex grid - exact */
@@ -527,12 +527,7 @@ function buildBoard(contId, spaces, outerSpaces, legendKey) {
   cont.appendChild(gn);
   cont.appendChild(board);
 
-  // Parameter icons
-  ['param-temp-icon','param-oxy-icon','param-venus-icon'].forEach(cls => {
-    const icon = document.createElement('div');
-    icon.className = `global-param-icon ${cls}`;
-    cont.appendChild(icon);
-  });
+  // Parameter icons are baked into the board background image
 }
 
 buildBoard('board-tharsis-cont', THARSIS, OUTER.tharsis, 'tharsis');
