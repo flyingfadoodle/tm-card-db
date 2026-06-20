@@ -2,18 +2,19 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=960" />
+  <meta name="viewport" content="width=1200" />
   <title>Awards & Milestones - TM Database</title>
+  <link rel="stylesheet" href="css/mystyles.css" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #111; font-family: Tahoma, sans-serif; color: #ddd; }
+    body { background: #111; }
 
     #tab-bar { width:100%; background:#1a0e00; border-bottom:2px solid #8b6914; display:flex; padding:0 20px; gap:4px; }
     #tab-bar a { font-family:Prototype,serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#a88848; text-decoration:none; padding:10px 20px 8px; border-bottom:3px solid transparent; display:inline-block; }
     #tab-bar a:hover { color:#e8c848; }
     #tab-bar a.active { color:#e8c848; border-bottom-color:#c8a848; }
 
-    .page { max-width: 1300px; margin: 0 auto; padding: 30px 20px; }
+    .page { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
 
     h2 {
       font-family: Prototype, serif;
@@ -30,53 +31,83 @@
     .grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .card {
-      width: 156px;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 6px;
+    /* Tile - styled like physical card */
+    .ma-tile {
+      width: 150px;
+      border-radius: 10px;
       overflow: hidden;
+      border: 2px solid #aaa;
+      background: #e8e8e8;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
       cursor: default;
-      transition: border-color .15s, box-shadow .15s;
       position: relative;
+      transition: transform .15s, box-shadow .15s;
     }
-    .card:hover {
-      border-color: #8b6914;
-      box-shadow: 0 0 10px rgba(139,105,20,0.4);
-    }
-
-    /* Icon: exact sprite size, clip to one icon height */
-    .card-icon {
-      width: 156px;
-      height: 100px;
-      background-repeat: no-repeat;
-      background-size: 156px 1800px;
-      flex-shrink: 0;
-    }
-    .card-icon.milestone {
-      background-image: url('https://raw.githubusercontent.com/ssimeonoff/ssimeonoff.github.io/master/images/ma-randomizer/column_m.png');
-    }
-    .card-icon.award {
-      background-image: url('https://raw.githubusercontent.com/ssimeonoff/ssimeonoff.github.io/master/images/ma-randomizer/column_a.png');
+    .ma-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7);
     }
 
-    .card-name {
+    /* Top bar with requirement */
+    .ma-header {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: Prototype, serif;
-      font-size: 10px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: .05em;
+      gap: 4px;
+      padding: 0 6px;
+    }
+    .ma-header.milestone { background: linear-gradient(180deg, #c8a840, #a07820); color: #fff; }
+    .ma-header.award { background: linear-gradient(180deg, #d4b840, #b09020); color: #fff; }
+
+    .req-num {
+      background: #f0d060;
+      color: #333;
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-size: 12px;
+      font-weight: bold;
+      font-family: Prototype, serif;
+    }
+
+    /* Icon area */
+    .ma-icon {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d8d8d8;
+    }
+    .ma-icon img {
+      max-width: 90px;
+      max-height: 80px;
+      object-fit: contain;
+    }
+
+    /* Bottom name bar */
+    .ma-name {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Prototype, serif;
+      font-size: 9px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      text-align: center;
-      padding: 6px 4px;
-      color: #e8c848;
-      background: #0d0d0d;
-      border-top: 1px solid #333;
+      font-weight: bold;
     }
+    .ma-name.milestone { background: linear-gradient(180deg, #5a8a30, #3a6010); color: #fff; }
+    .ma-name.award     { background: linear-gradient(180deg, #d4a020, #b07010); color: #fff; }
 
     /* Tooltip */
-    .tooltip {
+    .ma-tooltip {
       display: none;
       position: absolute;
       bottom: calc(100% + 6px);
@@ -86,15 +117,26 @@
       border: 1px solid #8b6914;
       border-radius: 6px;
       padding: 8px 10px;
+      font-family: Tahoma, sans-serif;
       font-size: 11px;
       line-height: 1.5;
       color: #ddd;
-      width: 220px;
+      width: 200px;
       z-index: 100;
       pointer-events: none;
       white-space: normal;
     }
-    .card:hover .tooltip { display: block; }
+    .ma-tile:hover .ma-tooltip { display: block; }
+
+    /* Req icons - using ssimeonoff resource images */
+    .req-icon {
+      width: 16px;
+      height: 16px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -106,81 +148,158 @@
 </div>
 
 <div class="page">
-
   <h2>Milestones</h2>
   <div class="grid" id="milestones-grid"></div>
 
   <h2>Awards</h2>
   <div class="grid" id="awards-grid"></div>
-
 </div>
 
 <script>
+const BASE = 'https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/ma/';
+const RES  = 'https://raw.githubusercontent.com/ssimeonoff/ssimeonoff.github.io/master/images/resources/';
+const TAGS = 'https://raw.githubusercontent.com/ssimeonoff/ssimeonoff.github.io/master/images/tags/';
+
+// req: string shown in header, reqIcon: optional icon class/url, color for name bar
 const MILESTONES = [
-  {name:'Terraformer',    desc:'29 TR.'},
-  {name:'Mayor',          desc:'3 cities.'},
-  {name:'Gardener',       desc:'3 greeneries.'},
-  {name:'Builder',        desc:'7 building tags.'},
-  {name:'Planner',        desc:'16 cards in hand.'},
-  {name:'Generalist',     desc:'1 production of each resource.'},
-  {name:'Specialist',     desc:'10 production of 1 resource.'},
-  {name:'Ecologist',      desc:'4 bio tags (plant, microbe, animal).'},
-  {name:'Tycoon',         desc:'15 project cards played.'},
-  {name:'Legend',         desc:'4 event cards.'},
-  {name:'Diversifier',    desc:'8 different tags.'},
-  {name:'Tactician',      desc:'4 cards with requirements.'},
-  {name:'Polar Explorer', desc:'3 tiles in the bottom 2 rows.'},
-  {name:'Energizer',      desc:'6 energy production.'},
-  {name:'Rim Settler',    desc:'3 Jovian tags.'},
-  {name:'Hoverlord',      desc:'7 floater resources.'},
+  {name:'Briber',         icon:'briber',        req:'PAY 12',   desc:'Pay 12 M€ extra (20 total) to claim this milestone.', color:'orange'},
+  {name:'Builder',        icon:'builder7',       req:'7',        reqIcon:'building', desc:'7 building tags.'},
+  {name:'Coastguard',     icon:'coastguard',     req:'3',        reqIcon:'ocean',    desc:'3 tiles adjacent to ocean.'},
+  {name:'Diversifier',    icon:'diversifier',    req:'8',        desc:'8 different tags.'},
+  {name:'Ecologist',      icon:'ecologist',      req:'4',        desc:'4 bio tags (plant, microbe, animal).'},
+  {name:'Energizer',      icon:'energizer',      req:'6',        reqIcon:'energy',   desc:'6 energy production.'},
+  {name:'Engineer',       icon:'engineer',       req:'10',       desc:'10 energy + heat production combined.'},
+  {name:'Farmer',         icon:'farmer',         req:'5',        desc:'5 animal and microbe resources combined.'},
+  {name:'Forester',       icon:'forester',       req:'3',        reqIcon:'plant',    desc:'3 plant production.'},
+  {name:'Fundraiser',     icon:'fundraiser',     req:'12',       reqIcon:'mc',       desc:'12 M€ production.'},
+  {name:'Gardener',       icon:'gardener',       req:'3',        reqIcon:'greenery', desc:'3 greeneries.'},
+  {name:'Generalist',     icon:'generalist',     req:'+1',       desc:'1 production of each resource.'},
+  {name:'Geologist',      icon:'geologist',      req:'3',        desc:'3 tiles on or adjacent to volcanic areas.'},
+  {name:'Hydrologist',    icon:'hydrologist',    req:'4',        reqIcon:'ocean',    desc:'Having placed 4 oceans.'},
+  {name:'Landshaper',     icon:'landshaper',     req:'1',        desc:'1 city, 1 greenery, and 1 special tile.'},
+  {name:'Legend',         icon:'legend4',        req:'4',        desc:'4 event cards.'},
+  {name:'Lobbyist',       icon:'lobbyist',       req:'7',        desc:'All 7 delegates in parties.'},
+  {name:'Mayor',          icon:'mayor',          req:'3',        reqIcon:'city',     desc:'3 cities.'},
+  {name:'Merchant',       icon:'merchant',       req:'2',        desc:'2 of each standard resource.'},
+  {name:'Metallurgist',   icon:'metallurgist',   req:'6',        desc:'6 steel + titanium production combined.'},
+  {name:'Philantropist',  icon:'philantropist',  req:'5',        desc:'5 cards with non-negative VP.'},
+  {name:'Pioneer',        icon:'pioneer4',       req:'4',        desc:'4 colonies.'},
+  {name:'Planetologist',  icon:'planetologist',  req:'2+2+2',    desc:'2 Earth, 2 Venus, and 2 Jovian tags.'},
+  {name:'Planner',        icon:'planner',        req:'16',       reqIcon:'card',     desc:'16 cards in hand.'},
+  {name:'Producer',       icon:'producer',       req:'16',       desc:'Combined total production of at least 16.'},
+  {name:'Researcher',     icon:'researcher',     req:'4',        reqIcon:'science',  desc:'4 science tags.'},
+  {name:'Rim Settler',    icon:'rim-settler',    req:'3',        reqIcon:'jovian',   desc:'3 Jovian tags.'},
+  {name:'Spacefarer',     icon:'spacefarer4',    req:'4',        reqIcon:'space',    desc:'4 space tags.'},
+  {name:'Sponsor',        icon:'sponsor',        req:'3',        desc:'3 cards with cost 20 M€ or more.'},
+  {name:'Tactician',      icon:'tactician4',     req:'4',        desc:'4 cards with requirements.'},
+  {name:'Terraformer',    icon:'terraformer29',  req:'29',       reqIcon:'tr',       desc:'29 TR.'},
+  {name:'Terran',         icon:'terran5',        req:'5',        reqIcon:'earth',    desc:'5 Earth tags.'},
+  {name:'Thawer',         icon:'thawer',         req:'5',        desc:'Having raised temperature 5 times.'},
+  {name:'Trader',         icon:'trader',         req:'3',        desc:'3 different types of resources on cards.'},
 ];
 
 const AWARDS = [
-  {name:'Landlord',       desc:'Most tiles.'},
-  {name:'Scientist',      desc:'Most science tags.'},
-  {name:'Banker',         desc:'Highest M€ production.'},
-  {name:'Thermalist',     desc:'Most heat resources.'},
-  {name:'Miner',          desc:'Most steel and titanium resources combined.'},
-  {name:'Celebrity',      desc:'Most cards costing 20 M€ or more.'},
-  {name:'Industrialist',  desc:'Most steel and energy resources combined.'},
-  {name:'Desert Settler', desc:'Most tiles in the bottom 2 rows.'},
-  {name:'Estate Dealer',  desc:'Most tiles next to ocean.'},
-  {name:'Benefactor',     desc:'Highest TR. Count BEFORE all other A&M!'},
-  {name:'Cultivator',     desc:'Most greeneries.'},
-  {name:'Magnate',        desc:'Most green (automated) cards.'},
-  {name:'Space Baron',    desc:'Most space tags.'},
-  {name:'Excentric',      desc:'Most resources on cards.'},
-  {name:'Contractor',     desc:'Most building tags.'},
-  {name:'Venuphile',      desc:'Most Venus tags.'},
+  {name:'Administrator',  icon:'administrator',  desc:'Most cards with no tags.'},
+  {name:'Banker',         icon:'banker',         desc:'Highest M€ production.'},
+  {name:'Benefactor',     icon:'benefactor',     desc:'Highest TR. Count BEFORE all other A&M!', color:'red'},
+  {name:'Biologist',      icon:'biologist',      desc:'Most bio tags (plant, microbe, animal).'},
+  {name:'Botanist',       icon:'botanist',       desc:'Highest plant production.'},
+  {name:'Celebrity',      icon:'celebrity',      desc:'Most cards costing 20 M€ or more.'},
+  {name:'Collector',      icon:'collector',      desc:'Most different types of resources.'},
+  {name:'Constructor',    icon:'constructor',    desc:'Most colonies and cities combined.'},
+  {name:'Contractor',     icon:'contractor',     desc:'Most building tags.'},
+  {name:'Cultivator',     icon:'cultivator',     desc:'Most greeneries.'},
+  {name:'Electrician',    icon:'electrician',    desc:'Most power tags.'},
+  {name:'Estate Dealer',  icon:'estate-dealer',  desc:'Most tiles next to ocean.'},
+  {name:'Excentric',      icon:'excentric',      desc:'Most resources on cards.'},
+  {name:'Forecaster',     icon:'forecaster',     desc:'Most cards with requirements.'},
+  {name:'Founder',        icon:'founder',        desc:'Most tiles adjacent to special tiles.'},
+  {name:'Highlander',     icon:'highlander',     desc:'Most tiles not adjacent to ocean.'},
+  {name:'Incorporator',   icon:'incorporator',   desc:'Most cards costing 10 M€ or less.'},
+  {name:'Industrialist',  icon:'industrialist',  desc:'Most steel and energy resources combined.'},
+  {name:'Investor',       icon:'investor',       desc:'Most Earth tags.'},
+  {name:'Landlord',       icon:'landlord',       desc:'Most tiles.'},
+  {name:'Landscaper',     icon:'landscaper',     desc:'Most tiles connected together.'},
+  {name:'Magnate',        icon:'magnate',        desc:'Most green (automated) cards.'},
+  {name:'Manufacturer',   icon:'manufacturer',   desc:'Highest steel + heat production combined.'},
+  {name:'Metropolist',    icon:'metropolist',    desc:'Most cities.'},
+  {name:'Miner',          icon:'miner',          desc:'Most steel and titanium resources combined.'},
+  {name:'Mogul',          icon:'mogul',          desc:'Highest steel, titanium, plant, energy, heat production combined.'},
+  {name:'Politician',     icon:'politician',     desc:'Most Party Leaders and influence combined.'},
+  {name:'Promoter',       icon:'promoter',       desc:'Most cards in your event pile.'},
+  {name:'Scientist',      icon:'scientist',      desc:'Most science tags.'},
+  {name:'Space Baron',    icon:'space-baron',    desc:'Most space tags.'},
+  {name:'Suburbian',      icon:'suburbian',      desc:'Most tiles on edges of the map.'},
+  {name:'Thermalist',     icon:'thermalist',     desc:'Most heat resources.'},
+  {name:'Traveller',      icon:'traveller',      desc:'Most Jovian and Earth tags combined.'},
+  {name:'Visionary',      icon:'visionary',      desc:'Most cards in hand.'},
+  {name:'Zoologist',      icon:'zoologist',      desc:'Most animal and microbe resources combined.'},
 ];
 
-function buildGrid(items, containerId, type) {
-  const grid = document.getElementById(containerId);
-  items.forEach((item, i) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+function buildTile(item, type) {
+  const tile = document.createElement('div');
+  tile.className = 'ma-tile';
 
-    const icon = document.createElement('div');
-    icon.className = `card-icon ${type}`;
-    icon.style.backgroundPositionY = -(i * 100) + 'px';
+  // Header
+  const header = document.createElement('div');
+  header.className = `ma-header ${type}`;
+  if (item.req) {
+    const num = document.createElement('span');
+    num.className = 'req-num';
+    num.textContent = item.req;
+    header.appendChild(num);
+  }
+  if (item.reqIcon) {
+    const ico = document.createElement('span');
+    ico.textContent = item.reqIcon === 'mc' ? 'M€' :
+                      item.reqIcon === 'tr' ? 'TR' :
+                      item.reqIcon === 'energy' ? '⚡' :
+                      item.reqIcon === 'plant' ? '🌿' :
+                      item.reqIcon === 'ocean' ? '🌊' :
+                      item.reqIcon === 'city' ? '🏙' :
+                      item.reqIcon === 'card' ? '🃏' :
+                      item.reqIcon === 'science' ? '⚛' :
+                      item.reqIcon === 'jovian' ? 'JOV' :
+                      item.reqIcon === 'space' ? 'SPC' :
+                      item.reqIcon === 'earth' ? 'ETH' :
+                      item.reqIcon === 'building' ? 'BLD' :
+                      item.reqIcon === 'greenery' ? '🌳' : '';
+    ico.style.fontSize = '12px';
+    header.appendChild(ico);
+  }
+  if (type === 'award' && !item.req) {
+    header.textContent = 'AWARD';
+  }
+  tile.appendChild(header);
 
-    const name = document.createElement('div');
-    name.className = 'card-name';
-    name.textContent = item.name;
+  // Icon
+  const iconDiv = document.createElement('div');
+  iconDiv.className = 'ma-icon';
+  const img = document.createElement('img');
+  img.src = BASE + item.icon + '.png';
+  img.alt = item.name;
+  iconDiv.appendChild(img);
+  tile.appendChild(iconDiv);
 
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.textContent = item.desc;
+  // Name bar
+  const nameDiv = document.createElement('div');
+  nameDiv.className = `ma-name ${type}`;
+  nameDiv.textContent = item.name;
+  tile.appendChild(nameDiv);
 
-    card.appendChild(icon);
-    card.appendChild(name);
-    card.appendChild(tooltip);
-    grid.appendChild(card);
-  });
+  // Tooltip
+  const tooltip = document.createElement('div');
+  tooltip.className = 'ma-tooltip';
+  tooltip.textContent = item.desc;
+  tile.appendChild(tooltip);
+
+  return tile;
 }
 
-buildGrid(MILESTONES, 'milestones-grid', 'milestone');
-buildGrid(AWARDS, 'awards-grid', 'award');
+const mg = document.getElementById('milestones-grid');
+const ag = document.getElementById('awards-grid');
+MILESTONES.forEach(m => mg.appendChild(buildTile(m, 'milestone')));
+AWARDS.forEach(a => ag.appendChild(buildTile(a, 'award')));
 </script>
 </body>
 </html>
