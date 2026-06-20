@@ -171,157 +171,85 @@
     .ma-name.milestone { color: #fff; }
     .ma-name.award { color: #fff; }
 
-    /* ===== RANDOMIZER ===== */
+    
+
+    /* RANDOMIZER */
     #randomizer {
-      margin-top: 20px;
-      padding: 40px 20px 80px;
+      margin-top: 60px;
+      padding: 40px 0 80px;
       border-top: 1px solid #8b6914;
     }
-
-    #rand-controls {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin: 24px 0 40px;
-    }
-
     #rand-btn {
       font-family: Prototype, serif;
-      font-size: 16px;
+      font-size: 15px;
       letter-spacing: .1em;
       color: #000;
       background: linear-gradient(180deg, #e8c840, #b09020);
       border: none;
       border-radius: 8px;
-      padding: 14px 32px;
+      padding: 14px 36px;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      transition: transform .1s, box-shadow .1s;
+      margin-right: 12px;
     }
-    #rand-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
-    #rand-btn:active { transform: translateY(1px); }
-
-    #rand-reset {
+    #rand-btn:hover { opacity: .9; }
+    #rand-reset-btn {
       font-family: Prototype, serif;
-      font-size: 13px;
+      font-size: 12px;
       color: #888;
       background: none;
       border: 1px solid #444;
       border-radius: 6px;
       padding: 10px 20px;
       cursor: pointer;
-      transition: color .15s, border-color .15s;
     }
-    #rand-reset:hover { color: #ccc; border-color: #888; }
+    #rand-reset-btn:hover { color: #ccc; border-color: #888; }
+    .rand-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .rand-label { font-family: Prototype, serif; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin: 24px 0 12px; }
+    .rand-label.m { color: #6aaa30; }
+    .rand-label.a { color: #d4a020; }
 
-    #rand-sections {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-
-    .rand-label {
-      font-family: Prototype, serif;
-      font-size: 13px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .milestone-label { color: #6aaa30; }
-    .award-label { color: #d4a020; }
-
-    .rand-slots {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .rand-slot {
+    .rcard {
       width: 140px;
-      height: 120px;
-      border-radius: 10px;
-      border: 2px dashed #333;
-      background: #111;
-      position: relative;
-      perspective: 600px;
-    }
-
-    /* Card flip animation */
-    .rand-slot .flip-card {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      transform: rotateY(180deg);
-      border-radius: 10px;
-    }
-    .rand-slot.revealed .flip-card {
-      transform: rotateY(0deg);
-    }
-
-    .flip-front, .flip-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
       border-radius: 10px;
       overflow: hidden;
-    }
-
-    .flip-back {
-      background: linear-gradient(135deg, #1a1000, #3a2800);
-      border: 2px solid #8b6914;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform: rotateY(180deg);
-    }
-    .flip-back::after {
-      content: 'TM';
-      font-family: Prototype, serif;
-      font-size: 22px;
-      color: #8b6914;
-      opacity: 0.5;
-    }
-
-    .flip-front {
+      border: 2px solid #444;
       background: #1a1a1a;
-      display: flex;
-      flex-direction: column;
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .flip-front .rand-header {
+    .rcard.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .rcard-header {
       font-family: Prototype, serif;
-      font-size: 10px;
+      font-size: 9px;
       letter-spacing: .06em;
       text-align: center;
       padding: 4px;
-      background: linear-gradient(180deg, #c8a840, #a07820);
       color: #fff;
     }
-    .flip-front img {
+    .rcard img {
       width: 280px;
       height: 166px;
       transform: scale(0.5);
       transform-origin: top left;
-      position: absolute;
-      top: 28px;
-      left: 0;
+      display: block;
+      margin-bottom: -83px;
     }
-    .flip-front .rand-desc {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-family: Tahoma, sans-serif;
-      font-size: 8px;
-      color: #999;
+    .rcard-name {
+      font-family: Prototype, serif;
+      font-size: 9px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
       text-align: center;
-      padding: 2px 4px;
-      background: rgba(0,0,0,0.7);
-      line-height: 1.3;
+      padding: 5px 4px;
+      color: #e8c848;
+      background: #111;
+      border-top: 1px solid #333;
     }
-    /* ======================= */
   </style>
 </head>
 <body>
@@ -339,15 +267,6 @@
   <h2>Awards</h2>
   <div class="grid" id="awards-grid"></div>
 </div>
-  <!-- RANDOMIZER -->
-  <div id="randomizer" style="margin-top:60px;padding:40px 20px 80px;border-top:1px solid #8b6914;">
-    <h2 style="font-family:Prototype,serif;font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:#c8a848;border-bottom:1px solid #8b6914;padding-bottom:8px;margin-bottom:24px;">Milestone &amp; Award Randomizer</h2>
-
-    <div style="display:flex;gap:12px;margin-bottom:40px;">
-      <button onclick="randomize()" style="font-family:Prototype,serif;font-size:16px;letter-spacing:.1em;color:#000;background:linear-gradient(180deg,#e8c840,#b09020);border:none;border-radius:8px;padding:14px 32px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.5);">&#9654; RANDOMIZE</button>
-      <button onclick="resetRand()" style="font-family:Prototype,serif;font-size:13px;color:#888;background:none;border:1px solid #444;border-radius:6px;padding:10px 20px;cursor:pointer;">&#8635; RESET</button>
-    </div>
-
     <div style="margin-bottom:12px;font-family:Prototype,serif;font-size:13px;letter-spacing:.12em;color:#6aaa30;text-transform:uppercase;">Milestones</div>
     <div id="milestone-slots" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;">
       <div class="rand-slot"></div><div class="rand-slot"></div><div class="rand-slot"></div><div class="rand-slot"></div><div class="rand-slot"></div>
@@ -358,6 +277,20 @@
       <div class="rand-slot"></div><div class="rand-slot"></div><div class="rand-slot"></div><div class="rand-slot"></div><div class="rand-slot"></div>
     </div>
   </div>
+
+  <!-- RANDOMIZER -->
+  <div id="randomizer">
+    <h2>Milestone &amp; Award Randomizer</h2>
+    <div style="margin:20px 0 32px">
+      <button id="rand-btn" onclick="doRandom()">&#9654; RANDOMIZE</button>
+      <button id="rand-reset-btn" onclick="doReset()">&#8635; RESET</button>
+    </div>
+    <div class="rand-label m">Milestones</div>
+    <div class="rand-row" id="r-milestones"></div>
+    <div class="rand-label a">Awards</div>
+    <div class="rand-row" id="r-awards"></div>
+  </div>
+  <!-- END RANDOMIZER -->
 
 
 <script>
@@ -513,83 +446,72 @@ MILESTONES.forEach(m => mg.appendChild(buildTile(m, 'milestone')));
 AWARDS.forEach(a => ag.appendChild(buildTile(a, 'award')));
 </script>
 
+
 <script>
-const BASE2 = 'https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/ma/';
-
-const ALL_M = [
-  {name:'Briber',icon:'briber'},{name:'Builder',icon:'builder7'},{name:'Coastguard',icon:'coastguard'},
-  {name:'Diversifier',icon:'diversifier'},{name:'Ecologist',icon:'ecologist'},{name:'Energizer',icon:'energizer'},
-  {name:'Engineer',icon:'engineer'},{name:'Farmer',icon:'farmer'},{name:'Forester',icon:'forester'},
-  {name:'Fundraiser',icon:'fundraiser'},{name:'Gardener',icon:'gardener'},{name:'Generalist',icon:'generalist'},
-  {name:'Geologist',icon:'geologist'},{name:'Hydrologist',icon:'hydrologist'},{name:'Landshaper',icon:'landshaper'},
-  {name:'Legend',icon:'legend4'},{name:'Lobbyist',icon:'lobbyist'},{name:'Mayor',icon:'mayor'},
-  {name:'Merchant',icon:'merchant'},{name:'Metallurgist',icon:'metallurgist'},{name:'Philantropist',icon:'philantropist'},
-  {name:'Pioneer',icon:'pioneer4'},{name:'Planetologist',icon:'planetologist'},{name:'Planner',icon:'planner'},
-  {name:'Producer',icon:'producer'},{name:'Researcher',icon:'researcher'},{name:'Rim Settler',icon:'rim-settler'},
-  {name:'Spacefarer',icon:'spacefarer4'},{name:'Sponsor',icon:'sponsor'},{name:'Tactician',icon:'tactician4'},
-  {name:'Terraformer',icon:'terraformer29'},{name:'Terran',icon:'terran5'},{name:'Thawer',icon:'thawer'},
-  {name:'Trader',icon:'trader'},
+const RM = [
+  {n:'Briber',i:'briber'},{n:'Builder',i:'builder7'},{n:'Coastguard',i:'coastguard'},
+  {n:'Diversifier',i:'diversifier'},{n:'Ecologist',i:'ecologist'},{n:'Energizer',i:'energizer'},
+  {n:'Engineer',i:'engineer'},{n:'Farmer',i:'farmer'},{n:'Forester',i:'forester'},
+  {n:'Fundraiser',i:'fundraiser'},{n:'Gardener',i:'gardener'},{n:'Generalist',i:'generalist'},
+  {n:'Geologist',i:'geologist'},{n:'Hydrologist',i:'hydrologist'},{n:'Landshaper',i:'landshaper'},
+  {n:'Legend',i:'legend4'},{n:'Lobbyist',i:'lobbyist'},{n:'Mayor',i:'mayor'},
+  {n:'Merchant',i:'merchant'},{n:'Metallurgist',i:'metallurgist'},{n:'Philantropist',i:'philantropist'},
+  {n:'Pioneer',i:'pioneer4'},{n:'Planetologist',i:'planetologist'},{n:'Planner',i:'planner'},
+  {n:'Producer',i:'producer'},{n:'Researcher',i:'researcher'},{n:'Rim Settler',i:'rim-settler'},
+  {n:'Spacefarer',i:'spacefarer4'},{n:'Sponsor',i:'sponsor'},{n:'Tactician',i:'tactician4'},
+  {n:'Terraformer',i:'terraformer29'},{n:'Terran',i:'terran5'},{n:'Thawer',i:'thawer'},{n:'Trader',i:'trader'},
 ];
-
-const ALL_A = [
-  {name:'Administrator',icon:'administrator'},{name:'Banker',icon:'banker'},{name:'Benefactor',icon:'benefactor'},
-  {name:'Biologist',icon:'biologist'},{name:'Botanist',icon:'botanist'},{name:'Celebrity',icon:'celebrity'},
-  {name:'Collector',icon:'collector'},{name:'Constructor',icon:'constructor'},{name:'Contractor',icon:'contractor'},
-  {name:'Cultivator',icon:'cultivator'},{name:'Electrician',icon:'electrician'},{name:'Estate Dealer',icon:'estate-dealer'},
-  {name:'Excentric',icon:'excentric'},{name:'Forecaster',icon:'forecaster'},{name:'Founder',icon:'founder'},
-  {name:'Highlander',icon:'highlander'},{name:'Incorporator',icon:'incorporator'},{name:'Industrialist',icon:'industrialist'},
-  {name:'Investor',icon:'investor'},{name:'Landlord',icon:'landlord'},{name:'Landscaper',icon:'landscaper'},
-  {name:'Magnate',icon:'magnate'},{name:'Manufacturer',icon:'manufacturer'},{name:'Metropolist',icon:'metropolist'},
-  {name:'Miner',icon:'miner'},{name:'Mogul',icon:'mogul'},{name:'Politician',icon:'t-politician'},
-  {name:'Promoter',icon:'promoter'},{name:'Scientist',icon:'scientist'},{name:'Space Baron',icon:'space-baron'},
-  {name:'Suburbian',icon:'suburbian'},{name:'Thermalist',icon:'thermalist'},{name:'Traveller',icon:'traveller'},
-  {name:'Visionary',icon:'visionary'},{name:'Zoologist',icon:'zoologist'},
+const RA = [
+  {n:'Administrator',i:'administrator'},{n:'Banker',i:'banker'},{n:'Benefactor',i:'benefactor'},
+  {n:'Biologist',i:'biologist'},{n:'Botanist',i:'botanist'},{n:'Celebrity',i:'celebrity'},
+  {n:'Collector',i:'collector'},{n:'Constructor',i:'constructor'},{n:'Contractor',i:'contractor'},
+  {n:'Cultivator',i:'cultivator'},{n:'Electrician',i:'electrician'},{n:'Estate Dealer',i:'estate-dealer'},
+  {n:'Excentric',i:'excentric'},{n:'Forecaster',i:'forecaster'},{n:'Founder',i:'founder'},
+  {n:'Highlander',i:'highlander'},{n:'Incorporator',i:'incorporator'},{n:'Industrialist',i:'industrialist'},
+  {n:'Investor',i:'investor'},{n:'Landlord',i:'landlord'},{n:'Landscaper',i:'landscaper'},
+  {n:'Magnate',i:'magnate'},{n:'Manufacturer',i:'manufacturer'},{n:'Metropolist',i:'metropolist'},
+  {n:'Miner',i:'miner'},{n:'Mogul',i:'mogul'},{n:'Politician',i:'t-politician'},
+  {n:'Promoter',i:'promoter'},{n:'Scientist',i:'scientist'},{n:'Space Baron',i:'space-baron'},
+  {n:'Suburbian',i:'suburbian'},{n:'Thermalist',i:'thermalist'},{n:'Traveller',i:'traveller'},
+  {n:'Visionary',i:'visionary'},{n:'Zoologist',i:'zoologist'},
 ];
+const MABASE = 'https://raw.githubusercontent.com/terraforming-mars/terraforming-mars/main/assets/ma/';
 
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 
-function makeRandCard(item, type) {
-  const slot = document.createElement('div');
-  slot.className = 'rand-slot';
-  const flip = document.createElement('div');
-  flip.className = 'flip-card';
-  const back = document.createElement('div');
-  back.className = 'flip-back';
-  const front = document.createElement('div');
-  front.className = 'flip-front';
-  const header = document.createElement('div');
-  header.className = 'rand-header';
-  header.style.background = type==='milestone'
-    ? 'linear-gradient(180deg,#c8a840,#a07820)'
-    : 'linear-gradient(180deg,#d4b840,#b09020)';
+function makeRC(item, type) {
+  const d = document.createElement('div');
+  d.className = 'rcard';
+  const hdr = document.createElement('div');
+  hdr.className = 'rcard-header';
+  hdr.style.background = type==='m' ? 'linear-gradient(180deg,#c8a840,#a07820)' : 'linear-gradient(180deg,#d4b840,#b09020)';
+  hdr.textContent = type==='m' ? 'MILESTONE' : 'AWARD';
   const img = document.createElement('img');
-  img.src = BASE2 + item.icon + '.png';
-  img.alt = item.name;
-  const label = document.createElement('div');
-  label.className = 'rand-name';
-  label.textContent = item.name;
-  front.appendChild(header);
-  front.appendChild(img);
-  front.appendChild(label);
-  flip.appendChild(back);
-  flip.appendChild(front);
-  slot.appendChild(flip);
-  return slot;
+  img.src = MABASE + item.i + '.png';
+  const nm = document.createElement('div');
+  nm.className = 'rcard-name';
+  nm.textContent = item.n;
+  d.appendChild(hdr); d.appendChild(img); d.appendChild(nm);
+  return d;
 }
 
-function randomize() {
-  const ms = shuffle(ALL_M).slice(0,5);
-  const aw = shuffle(ALL_A).slice(0,5);
-  const mc = document.getElementById('milestone-slots');
-  const ac = document.getElementById('award-slots');
-  mc.innerHTML=''; ac.innerHTML='';
-  ms.forEach((m,i)=>{const card=makeRandCard(m,'milestone');mc.appendChild(card);setTimeout(()=>card.classList.add('revealed'),150+i*180);});
-  aw.forEach((a,i)=>{const card=makeRandCard(a,'award');ac.appendChild(card);setTimeout(()=>card.classList.add('revealed'),150+i*180);});
+function doRandom() {
+  const mc = document.getElementById('r-milestones');
+  const ac = document.getElementById('r-awards');
+  mc.innerHTML = ''; ac.innerHTML = '';
+  shuf(RM).slice(0,5).forEach((m,i) => {
+    const c = makeRC(m,'m'); mc.appendChild(c);
+    setTimeout(() => c.classList.add('show'), 100 + i*120);
+  });
+  shuf(RA).slice(0,5).forEach((a,i) => {
+    const c = makeRC(a,'a'); ac.appendChild(c);
+    setTimeout(() => c.classList.add('show'), 100 + i*120);
+  });
 }
 
-function resetRand() {
-  document.getElementById('milestone-slots').innerHTML='<div class="rand-slot"></div>'.repeat(5);
-  document.getElementById('award-slots').innerHTML='<div class="rand-slot"></div>'.repeat(5);
+function doReset() {
+  document.getElementById('r-milestones').innerHTML = '';
+  document.getElementById('r-awards').innerHTML = '';
 }
 </script>
 </body>
