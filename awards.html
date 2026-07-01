@@ -569,15 +569,15 @@ function makeRC(item, type) {
 
   // Header
   const hdr = document.createElement('div');
-  hdr.style.cssText = `width:100%;height:18px;min-height:18px;max-height:18px;display:flex;align-items:center;justify-content:center;font-family:Prototype,serif;font-size:8px;letter-spacing:.05em;color:#fff;background:${topColor};`;
+  hdr.style.cssText = `width:100%;height:18px;min-height:18px;max-height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:Prototype,serif;font-size:8px;letter-spacing:.05em;color:#fff;background:${topColor};`;
 
   // Image
   const imgWrap = document.createElement('div');
-  imgWrap.style.cssText = 'width:140px;height:103px;min-height:103px;max-height:103px;position:relative;overflow:hidden;flex-shrink:0;';
+  imgWrap.style.cssText = 'width:136px;height:99px;min-height:99px;max-height:99px;position:relative;overflow:hidden;flex-shrink:0;';
   const img = document.createElement('img');
   img.src = MABASE + item.i + '.png';
   img.alt = item.n;
-  img.style.cssText = 'width:140px;height:103px;object-fit:contain;display:block;';
+  img.style.cssText = 'width:136px;height:99px;object-fit:contain;display:block;';
   imgWrap.appendChild(img);
   if (item.tag) {
     const tagImg = document.createElement('img');
